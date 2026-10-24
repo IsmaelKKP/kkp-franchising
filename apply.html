@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="KKP Lending franchise partnership application">
+<title>Franchise Application | KKP Lending</title>
+<style>
+:root{--navy:#103b75;--blue:#0966d3;--line:#d8e6f6;--ink:#183b67}
+*{box-sizing:border-box}body{margin:0;background:#f5f9fe;color:var(--ink);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.6}
+a{color:var(--blue);text-decoration:none}header{background:white;border-bottom:1px solid var(--line)}
+.header-inner{max-width:1050px;margin:auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:13px;color:var(--navy);font-weight:800;line-height:1.3}
+.brand img{width:56px;height:56px;object-fit:contain}.brand small{display:block;color:#ae7c23;font-size:11px;font-weight:700}
+main{max-width:860px;margin:48px auto 75px;padding:0 20px}
+.intro{text-align:center;margin-bottom:27px}.eyebrow{font-size:12px;font-weight:900;letter-spacing:2px;color:#c18d2c}
+h1{font-size:clamp(30px,4.5vw,45px);line-height:1.14;color:var(--navy);margin:10px 0 15px}
+.intro p{color:#55708e;max-width:690px;margin:0 auto}
+.card{background:white;border:1px solid var(--line);border-radius:20px;padding:clamp(20px,4vw,38px);box-shadow:0 18px 45px #163c6810}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-size:13px;color:var(--navy);font-weight:800}
+.field input,.field select,.field textarea{width:100%;padding:13px 14px;border:1px solid #bdd1e9;border-radius:9px;font:inherit;background:white;color:#153b68}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid #77b0f6}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 19px;border-radius:9px;font-weight:800;font-size:14px;border:1px solid var(--blue);background:var(--blue);color:white;cursor:pointer}
+.btn.secondary{background:white;color:var(--blue)}.actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:20px}
+.small{font-size:12px;color:#607995}.success{display:none;padding:14px;margin-top:12px;background:#e8f7ee;border:1px solid #9cd6ae;border-radius:9px;color:#17623c}
+footer{text-align:center;color:#69809a;padding:20px;font-size:12px}
+@media(max-width:650px){.calc-grid{grid-template-columns:1fr}.header-inner{flex-wrap:wrap}main{margin-top:28px}}
+</style></head><body>
+<header><div class="header-inner"><a class="brand" href="index.html">
+<img src="kkp-new-logo.png" alt="KKP logo"><span>Katuwang Kaagapay sa Pag-unlad Lending Corp.<small>FRANCHISING &amp; BUSINESS PARTNERSHIPS</small></span></a>
+<a class="btn secondary" href="index.html">← Back to Homepage</a></div></header>
+<main><div class="intro"><div class="eyebrow">BECOME A KKP PARTNER</div>
+<h1>Franchise Partnership Application</h1>
+<p>Interested in operating a KKP lending branch? Complete the application inquiry below. You may also explore the feasibility calculator before submitting.</p>
+<div class="actions"><a class="btn secondary" href="calculator.html" target="_blank" rel="noopener">View Feasibility Calculator ↗</a><a class="btn secondary" href="index.html">← Return Home</a></div></div>
+<div class="card"><h2 style="margin:0 0 7px;color:#103b75">Applicant Information</h2>
+<p style="margin:0 0 25px;color:#657d97;font-size:14px">Standard Franchise Package: ₱3,000,000 all-inclusive. Fields marked * are required.</p>
+<form id="inquiry"><div class="calc-grid"><div class="field"><label for="name">Full name *</label><input autocomplete="name" id="name" name="name" required=""/></div><div class="field"><label for="email">Email address *</label><input autocomplete="email" id="email" name="email" required="" type="email"/></div><div class="field"><label for="phone">Contact number *</label><input autocomplete="tel" id="phone" name="phone" required=""/></div><div class="field"><label for="program">Opportunity *</label><select id="program" name="program" required=""><option value="">Select opportunity</option><option>Lending Branch Franchising</option><option>License Sharing</option></select></div><div class="field"><label for="package">Preferred package</label><select id="package" name="package"><option value="">To be discussed</option><option>Standard Package — ₱3,000,000 all-inclusive</option></select></div><div class="field"><label for="place">Preferred location *</label><input id="place" name="location" placeholder="City, Province" required=""/></div></div><div class="field" style="margin-top:18px"><label for="message">Questions or additional details</label><textarea id="message" name="message" placeholder="Tell us about your business plans..." rows="4"></textarea></div><label style="display:flex;gap:10px;margin:18px 0;font-size:13px;color:#556780"><input required="" style="width:auto" type="checkbox"/> I consent to being contacted regarding this inquiry and understand my information will be used for application follow-up.</label><button class="btn" id="send" type="submit">Submit Franchise Inquiry →</button><p class="small" id="formStatus">Complete the form below. Submission requires KKP to configure its application-receiving service.</p><div class="success" id="success" role="status"></div></form></div>
+</main><footer>© 2026 KKP Lending Corp. · Application inquiries are subject to review and approval.</footer>
+<script>
+document.getElementById('inquiry').addEventListener('submit', async function(e){
+e.preventDefault();
+const endpoint=window.KKP_FRANCHISING_FORMSPREE_ENDPOINT || '';
+const status=document.getElementById('formStatus');
+if(!/^https:\/\/formspree\.io\/f\/[a-zA-Z0-9]+$/.test(endpoint)){
+ status.textContent='Online submission is not connected yet. KKP must configure its application endpoint before applications can be received.';
+ return;
+}
+const button=document.getElementById('send');button.disabled=true;button.textContent='Submitting...';
+try{
+ const response=await fetch(endpoint,{method:'POST',body:new FormData(this),headers:{Accept:'application/json'}});
+ if(!response.ok)throw new Error('Submission failed');
+ this.reset();document.getElementById('success').style.display='block';
+ document.getElementById('success').textContent='Your application inquiry was submitted successfully.';
+ status.textContent='Submission complete.';
+}catch(err){status.textContent='Unable to submit your application. Please try again later.'}
+finally{button.disabled=false;button.textContent='Submit Franchise Inquiry →'}
+});
+</script></body></html>
