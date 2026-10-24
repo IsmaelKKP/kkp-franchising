@@ -94,17 +94,62 @@ body{background:#071b33}
 #calculator .redline{background:#6cdbdb}
 @media(max-width:620px){.hero{background:linear-gradient(145deg,#071a33,#0d3761)}#calculator .calc{padding:17px}.hero-grid{gap:26px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style><style>
+/* KKP brand palette: blue and white lead, restrained metallic-gold details. */
+:root{--blue:#092c60;--blue2:#1957a4;--red:#cba45c;--white:#ffffff;--muted:#5c7190;--pale:#edf5ff;--line:#d7e6f7;--gold:#e1bc73;--gold-deep:#b78b43}
+body{background:#f5f9ff;color:#17365c}
+.top{background:#071d3f;color:#e0ebff}
+.nav{background:linear-gradient(110deg,rgba(5,29,67,.96),rgba(12,59,115,.93))!important;border-bottom:1px solid rgba(226,188,115,.3)!important;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.nav .brand img.holdings-logo{filter:drop-shadow(0 2px 10px rgba(226,188,115,.28)) drop-shadow(0 6px 10px rgba(0,0,0,.26))!important}
+.nav .brand>span{font-weight:900!important;color:#fff!important;letter-spacing:.1px!important;text-shadow:0 1px 12px rgba(130,187,255,.18)}
+.nav .brand small{color:#f0d49a!important;font-weight:800}
+.links a:hover{color:#f0d49a!important}
+.btn{background:linear-gradient(120deg,#2066b6,#124786)!important;color:#fff!important;box-shadow:0 8px 20px rgba(4,41,98,.18)}
+.btn:hover{background:linear-gradient(120deg,#2b7ad2,#1758a6)!important}
+.btn.outline{background:rgba(255,255,255,.09)!important;border:1px solid rgba(255,255,255,.45)!important}
+.btn.blue{background:#1759a5!important}
+.hero{background:radial-gradient(ellipse at 78% 22%,rgba(67,141,232,.37),transparent 43%),radial-gradient(circle at 12% 90%,rgba(227,189,113,.1),transparent 37%),linear-gradient(125deg,#071b3b,#0d3972 65%,#0b2a56)!important}
+.hero h1 em,.showcase-main h2 span{color:#e8c47e!important}
+.eyebrow,.showcase-kicker{color:#f0cf8b!important}
+.ribbon{background:linear-gradient(90deg,#0d468f,#1765b6)!important;border-top:1px solid rgba(233,197,132,.3);border-bottom:1px solid rgba(233,197,132,.3)}
+.section.pale,.pale{background:linear-gradient(155deg,#eef6ff,#f9fcff)!important}
+.section:not(.pale):not(#calculator){background:linear-gradient(145deg,#ffffff,#f4f9ff)}
+.head h2,.card h3{color:#103d78}
+.redline{background:linear-gradient(90deg,#d4a655,#f4d799)!important}
+.card,.metric,.calc{background:rgba(255,255,255,.86);border:1px solid rgba(148,187,231,.4);box-shadow:0 12px 38px rgba(13,55,112,.09);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.icon{background:#e6f1ff;color:#135ca8}
+.price-head{background:linear-gradient(115deg,#0b3a7c,#1763b1)}
+.price-card.premium .price-head{background:linear-gradient(115deg,#0b3a7c,#225fa3)!important;border-top:3px solid #e5bc70}
+.price-body li::marker{color:#c49a4d}
+.step:before{background:linear-gradient(145deg,#1a69bd,#0a3e83)!important;border:2px solid #e8c57c}
+.notice{background:#eff6ff;border-left-color:#d4a85d;color:#27466b}
+.franchise-showcase{background:radial-gradient(ellipse at 90% 0%,rgba(75,153,239,.3),transparent 55%),linear-gradient(145deg,rgba(19,65,119,.91),rgba(7,30,67,.95))!important;border:1px solid rgba(228,192,127,.3)!important;backdrop-filter:blur(18px)}
+.showcase-dot{background:#e6be75!important;box-shadow:0 0 0 4px rgba(230,190,117,.14)!important}
+.showcase-live{color:#f0d59d!important;border-color:rgba(233,195,127,.35)!important}
+#calculator{background:radial-gradient(circle at 80% 5%,rgba(46,124,214,.33),transparent 36%),linear-gradient(145deg,#071d40,#0c3971 55%,#071c3b)!important}
+#calculator .head .eyebrow,#calculator .proposal-tag{color:#f0ce8d!important}
+#calculator .notice{background:rgba(57,125,208,.15)!important;border:1px solid rgba(166,204,255,.3)!important;border-left:4px solid #e0b86b!important;color:#e6f2ff!important}
+#calculator .notice a{color:#f1d18f!important}
+#calculator .calc{background:rgba(17,54,104,.54)!important;border-color:rgba(169,208,251,.32)!important}
+#calculator .results{background:linear-gradient(135deg,rgba(31,93,162,.5),rgba(9,36,78,.72))!important}
+#calculator .results .stat{background:rgba(234,246,255,.09)!important}
+#calculator .field input:focus,#calculator .field select:focus{border-color:#e2c17f!important;box-shadow:0 0 0 3px rgba(226,193,127,.15)!important}
+#calculator #psaStatus{color:#c2dcff!important}
+#calculator .btn.blue,#calculator .actions>a.btn{background:#2369b6!important}
+.footer{background:linear-gradient(130deg,#061b3a,#0b3268)!important;border-top:2px solid rgba(227,186,107,.45)}
+.footer h4{color:#f4d599}
+@media(max-width:900px){.links{background:#0a2b5c!important}}
 </style></head><body><div class="top"><div class="wrap">KATUWANG AT KAAGAPAY SA PAG-UNLAD &nbsp; • &nbsp; BUSINESS PARTNERSHIP OPPORTUNITIES</div></div><header class="nav"><div class="wrap nav-inner"><a class="brand" href="#home"><img class="holdings-logo" src="kkp-holdings-logo.png" alt="KKP Holdings logo"><span>Katuwang Kaagapay sa Pag-unlad Lending Corp.<small>FRANCHISING &amp; BUSINESS PARTNERSHIPS</small></span></a><button class="menu" id="menu" aria-label="Toggle navigation">☰</button><nav class="links" id="links"><a href="#about">About</a><a href="#opportunities">Opportunities</a><a href="#calculator">Feasibility</a><a href="#businesses">KKP Group</a><a href="#foundation">Foundation</a><a href="#process">How it works</a><a class="btn" href="#apply">Apply Now →</a></nav></div></header>
-<main><section class="hero" id="home"><div class="wrap hero-grid"><div><div class="eyebrow">KKP Holdings • Lending Business Opportunities</div><h1>Build a stronger future <em>with KKP.</em></h1><p>Explore lending branch franchising and license-sharing opportunities supported by operational guidance, training, marketing frameworks, and a structured lending business model.</p><div class="actions"><a class="btn" href="#opportunities">Explore Packages →</a><a class="btn outline" href="#calculator">Check Your Location</a></div><p style="font-size:12px;margin-top:22px">For qualified applicants • Subject to evaluation, applicable approvals, and final agreement</p></div><div class="franchise-showcase" aria-label="License franchising overview">
-  <div class="showcase-top"><span class="showcase-dot"></span><span>KKP PARTNERSHIP PROGRAM</span><span class="showcase-live">BRANCH OPPORTUNITY</span></div>
-  <div class="showcase-main"><div class="showcase-kicker">A BUSINESS YOU CAN BUILD</div><h2>License <span>Franchising</span></h2><p>Launch a lending business with a structured setup and ongoing business support.</p></div>
+<main><section class="hero" id="home"><div class="wrap hero-grid"><div><div class="eyebrow">KATUWANG KAAGAPAY SA PAG-UNLAD LENDING CORP.</div><h1>Building financial opportunities <em>together.</em></h1><p>Since 2019, KKP Lending has focused on providing accessible financing solutions for individuals, employees, overseas Filipino workers, and growing businesses. Discover our services, values, and partnership opportunities.</p><div class="actions"><a class="btn" href="#about">About KKP Lending →</a><a class="btn outline" href="#calculator">Explore Feasibility</a></div><p style="font-size:12px;margin-top:22px">For qualified applicants • Subject to evaluation, applicable approvals, and final agreement</p></div><div class="franchise-showcase company-showcase" aria-label="About KKP Lending Corporation">
+  <div class="showcase-top"><span class="showcase-dot"></span><span>ESTABLISHED IN 2019</span><span class="showcase-live">ABOUT KKP LENDING</span></div>
+  <div class="showcase-main"><div class="showcase-kicker">OUR COMPANY • OUR COMMITMENT</div><h2>Financial access.<br><span>Stronger communities.</span></h2><p>Katuwang Kaagapay sa Pag-unlad Lending Corp. serves individuals, employees, entrepreneurs and small businesses through accessible, structured lending services.</p></div>
   <div class="showcase-features">
-    <div class="showcase-feature"><span class="showcase-symbol">▦</span><div><strong>Office setup</strong><small>Branding and branch guidance</small></div></div>
-    <div class="showcase-feature"><span class="showcase-symbol">◈</span><div><strong>Market study</strong><small>Territory research and campaigns</small></div></div>
-    <div class="showcase-feature"><span class="showcase-symbol">◇</span><div><strong>Lending systems</strong><small>Documentation and workflows</small></div></div>
-    <div class="showcase-feature"><span class="showcase-symbol">✦</span><div><strong>Partner support</strong><small>Training and operational guidance</small></div></div>
+    <div class="showcase-feature"><span class="showcase-symbol">◈</span><div><strong>Micro-lending</strong><small>Financing for everyday business needs</small></div></div>
+    <div class="showcase-feature"><span class="showcase-symbol">✦</span><div><strong>Salary loans</strong><small>Solutions for qualified employees</small></div></div>
+    <div class="showcase-feature"><span class="showcase-symbol">◇</span><div><strong>OFW loans</strong><small>Financing options for overseas workers</small></div></div>
+    <div class="showcase-feature"><span class="showcase-symbol">▦</span><div><strong>Corporate loans</strong><small>Business financing options</small></div></div>
   </div>
-  <div class="showcase-bottom"><div><small>STANDARD FRANCHISE FEE</small><strong>₱3,000,000</strong><span>Loan capital and office setup budget are separate.</span></div><a href="#opportunities" class="showcase-link">View packages <span aria-hidden="true">↗</span></a></div>
+  <div class="showcase-bottom"><div><small>OUR APPROACH</small><strong>Trust. Service. Growth.</strong><span>Transparent processes • Responsible lending • Long-term relationships</span></div><a href="#about" class="showcase-link">Get to know us <span aria-hidden="true">↗</span></a></div>
 </div></div></section><div class="ribbon"><div class="wrap"><span>✓ Lending systems &amp; documentation</span><span>✓ Training &amp; operational guidance</span><span>✓ Market study &amp; campaign planning</span><span>✓ Business partner support</span></div></div>
 <section class="section" id="about"><div class="wrap"><div class="head"><div class="eyebrow">Who we are</div><h2>Growing opportunities through responsible lending</h2><div class="redline"></div><p>KKP Lending Corp. — Katuwang at Kaagapay sa Pag-Unlad Lending Corporation — serves individuals, employees, microentrepreneurs, and small and medium enterprises through structured lending services.</p></div><div class="grid3"><article class="card"><div class="icon">🤝</div><h3>Partner-focused</h3><p>Structured support for entrepreneurs seeking to operate a lending branch within KKP's business framework.</p></article><article class="card"><div class="icon">📋</div><h3>Operational systems</h3><p>Loan workflow templates, borrower screening processes, collection monitoring, and portfolio management guidance.</p></article><article class="card"><div class="icon">📈</div><h3>Local market planning</h3><p>Market research, customer acquisition planning, and financial feasibility tools for evaluating proposed territories.</p></article></div></div></section>
 <section class="section pale" id="opportunities"><div class="wrap"><div class="head"><div class="eyebrow">Choose your path</div><h2>Franchising &amp; License Sharing</h2><div class="redline"></div><p>Explore two participation pathways and the published package options from the supplied KKP promotional materials.</p></div><div class="grid2" style="margin-bottom:30px"><article class="card"><div class="icon">🏢</div><h3>Lending Branch Franchising</h3><p>Establish and manage a lending branch with a local team, borrower acquisition, collections, and operations aligned with KKP policies.</p></article><article class="card"><div class="icon">🔑</div><h3>License Sharing</h3><p>Explore a license-sharing branch arrangement with branding, systems, and operational support. The exact rights, permissions, and responsibilities are subject to documentation and legal review.</p></article></div><div class="grid2"><article class="card price-card"><div class="price-head"><div class="tag">CORE BRANCH • STANDARD</div><h3>Standard Package</h3><div class="price">₱3,000,000 <small>franchise fee</small></div></div><div class="price-body"><p><b>Other amounts shown in promotional material:</b></p><ul><li>₱500,000 lending capital deployment</li><li>₱1,000,000 commercial office setup allocation</li><li>Brand signage and administrative setup</li><li>Market study and campaign planning</li><li>Operational and compliance training support</li><li>System, website and loan app support</li></ul><p class="price-note">Illustrative combined allocations: ₱4,500,000, assuming the listed amounts are additional. Confirm the final contract and inclusions with KKP.</p><a class="btn" href="#apply" data-package="Standard Package">Inquire About Standard →</a></div></article><article class="card price-card premium"><div class="price-head"><div class="tag">FULL BRANCH • PREMIUM</div><h3>Premium Package</h3><div class="price">₱5,000,000 <small>franchise fee</small></div></div><div class="price-body"><p><b>Other amounts shown in promotional material:</b></p><ul><li>₱1,000,000 lending capital deployment</li><li>₱2,000,000 commercial office setup allocation</li><li>Brand signage and administrative setup</li><li>Market study and campaign planning</li><li>Operational and compliance training support</li><li>System, website and loan app support</li></ul><p class="price-note">Illustrative combined allocations: ₱8,000,000, assuming the listed amounts are additional. Confirm the final contract and inclusions with KKP.</p><a class="btn" href="#apply" data-package="Premium Package">Inquire About Premium →</a></div></article></div><p class="small">Package descriptions are based on user-provided materials. No regulatory license or territorial rights are transferred merely by submitting an inquiry.</p></div></section>
