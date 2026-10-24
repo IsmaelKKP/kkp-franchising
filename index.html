@@ -416,6 +416,77 @@ html,body{overflow-x:hidden!important}
 @media(max-width:900px){.kkp-hero-glass{width:min(700px,75%)!important}.kkp-hero-backdrop{background-size:cover,auto 100%!important}}
 @media(max-width:700px){.kkp-hero-inner{min-height:0!important;padding:24px 16px 260px!important;display:block!important}.kkp-hero-glass{width:100%!important}.kkp-hero-backdrop{background-image:linear-gradient(180deg,rgba(246,251,255,.98) 0%,rgba(246,251,255,.94) 57%,rgba(246,251,255,.15) 100%),url('kkp-small-business-hero.jpg')!important;background-size:cover,auto 62%!important;background-position:center,right bottom!important}}
 </style>
+
+<style id="kkp-hero-seamless-blend-fix">
+/* Full-width visual treatment: fade the photograph itself into the page. */
+.hero.corporate-hero.kkp-approved-hero {
+  position: relative !important;
+  isolation: isolate;
+  min-height: 690px !important;
+  background: linear-gradient(115deg,#ffffff 0%,#f8fbff 49%,#eaf4ff 100%) !important;
+  overflow: hidden !important;
+}
+.kkp-approved-hero .kkp-hero-backdrop {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  opacity: 1 !important;
+  background: transparent url('kkp-small-business-hero.jpg') right center / auto 100% no-repeat !important;
+  -webkit-mask-image: linear-gradient(90deg,transparent 0%,transparent 28%,rgba(0,0,0,.08) 39%,rgba(0,0,0,.42) 51%,#000 70%);
+  mask-image: linear-gradient(90deg,transparent 0%,transparent 28%,rgba(0,0,0,.08) 39%,rgba(0,0,0,.42) 51%,#000 70%);
+  pointer-events: none;
+}
+.kkp-approved-hero .kkp-hero-inner {
+  position: relative !important;
+  z-index: 1 !important;
+  min-height: 690px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 55px 24px !important;
+  max-width: 1420px !important;
+}
+.kkp-approved-hero .kkp-hero-glass {
+  width: min(720px, 57%) !important;
+  max-width: 720px !important;
+  padding: clamp(20px,2.7vw,39px) !important;
+  background: linear-gradient(100deg,rgba(255,255,255,.91),rgba(255,255,255,.75)) !important;
+  border: 1px solid rgba(255,255,255,.52) !important;
+  border-radius: 27px !important;
+  box-shadow: 0 18px 45px rgba(23,76,135,.07) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+}
+.kkp-approved-hero .solution { transition: transform .18s ease,box-shadow .18s ease; }
+.kkp-approved-hero .solution:hover { transform: translateY(-3px);box-shadow: 0 12px 24px rgba(7,83,180,.12); }
+.kkp-approved-hero .solution:focus-visible { outline: 3px solid #075dcc;outline-offset: 3px; }
+.kkp-approved-hero h1 { font-size:clamp(38px,4.4vw,65px) !important; }
+.kkp-approved-hero h1 em { color:#0968d8 !important; }
+@media (max-width: 1000px) {
+  .kkp-approved-hero .kkp-hero-glass { width:min(690px,67%) !important; }
+  .kkp-approved-hero .kkp-hero-backdrop {
+    background-position: calc(100% + 110px) center !important;
+  }
+}
+@media (max-width: 700px) {
+  .hero.corporate-hero.kkp-approved-hero { min-height:0 !important; }
+  .kkp-approved-hero .kkp-hero-inner {
+    min-height:0 !important; padding:30px 16px 245px !important;
+    display:block !important;
+  }
+  .kkp-approved-hero .kkp-hero-glass {
+    width:100% !important; max-width:none !important;
+    padding:24px 18px !important;
+    background:rgba(255,255,255,.94) !important;
+  }
+  .kkp-approved-hero .kkp-hero-backdrop {
+    background-position:right bottom !important;
+    background-size:auto 57% !important;
+    -webkit-mask-image:linear-gradient(180deg,transparent 0%,transparent 42%,rgba(0,0,0,.28) 56%,#000 75%);
+    mask-image:linear-gradient(180deg,transparent 0%,transparent 42%,rgba(0,0,0,.28) 56%,#000 75%);
+  }
+  .kkp-approved-hero h1 {font-size:clamp(34px,8vw,48px) !important;}
+}
+</style>
 </head><body><div class="top"><div class="wrap">KATUWANG AT KAAGAPAY SA PAG-UNLAD   •   BUSINESS PARTNERSHIP OPPORTUNITIES</div></div><header class="nav"><div class="wrap nav-inner"><a class="brand" href="#home"><img alt="KKP Holdings logo" class="holdings-logo" src="kkp-new-logo.png"/><span>Katuwang Kaagapay sa Pag-unlad Lending Corp.<small>FRANCHISING &amp; BUSINESS PARTNERSHIPS</small></span></a><button aria-label="Toggle navigation" class="menu" id="menu">☰</button><nav class="links" id="links"><a href="#about">About</a><a href="#opportunities">Opportunities</a><a href="#lending-programs">Lending</a><a href="#expansion">Branches</a><a href="calculator.html" rel="noopener" target="_blank">Feasibility</a><a href="#businesses">KKP Group</a><a href="#foundation">Foundation</a><a href="#legal-compliances">Compliance</a><a href="operational-setup.html" rel="noopener noreferrer" target="_blank">Operations ↗</a><a href="#process">Partner journey</a><a href="#faq">FAQ</a><a class="btn" href="#apply">Apply Now →</a></nav></div></header>
 <main><section class="hero corporate-hero kkp-approved-hero" id="home">
 <div class="kkp-hero-backdrop" aria-hidden="true"></div>
@@ -446,10 +517,3 @@ html,body{overflow-x:hidden!important}
 <section class="section" id="apply"><div class="wrap"><div class="head"><div class="eyebrow">Get started</div><h2>Franchise Partnership Inquiry</h2><div class="redline"></div><p>Tell us about your plans. A KKP representative can contact you about franchise or license-sharing opportunities.</p></div><div class="form-wrap calc"><form id="inquiry"><div class="calc-grid"><div class="field"><label for="name">Full name *</label><input autocomplete="name" id="name" name="name" required=""/></div><div class="field"><label for="email">Email address *</label><input autocomplete="email" id="email" name="email" required="" type="email"/></div><div class="field"><label for="phone">Contact number *</label><input autocomplete="tel" id="phone" name="phone" required=""/></div><div class="field"><label for="program">Opportunity *</label><select id="program" name="program" required=""><option value="">Select opportunity</option><option>Lending Branch Franchising</option><option>License Sharing</option></select></div><div class="field"><label for="package">Preferred package</label><select id="package" name="package"><option value="">To be discussed</option><option>Standard Package</option></select></div><div class="field"><label for="place">Preferred location *</label><input id="place" name="location" placeholder="City, Province" required=""/></div></div><div class="field" style="margin-top:18px"><label for="message">Questions or additional details</label><textarea id="message" name="message" placeholder="Tell us about your business plans..." rows="4"></textarea></div><label style="display:flex;gap:10px;margin:18px 0;font-size:13px;color:#556780"><input required="" style="width:auto" type="checkbox"/> I consent to being contacted regarding this inquiry and understand my information will be used for application follow-up.</label><button class="btn" id="send" type="submit">Submit Franchise Inquiry →</button><p class="small" id="formStatus">The inquiry form is in preview mode until a separate Formspree endpoint is configured for this website.</p><div class="success" id="success" role="status"></div></form></div></div></section></main>
 <footer class="footer"><div class="wrap"><div class="footer-grid"><div><div class="brand"><span>Katuwang Kaagapay sa Pag-unlad Lending Corp.<small>FRANCHISING &amp; BUSINESS PARTNERSHIPS</small></span></div><p>Business opportunities in lending branch franchising and license sharing, subject to qualification and formal agreements.</p></div><div><h4>Explore</h4><p><a href="#opportunities">Franchise packages</a></p><p><a href="calculator.html" rel="noopener" target="_blank">Feasibility calculator</a></p><p><a href="#apply">Apply now</a></p></div><div><h4>KKP Group</h4><p><a href="https://www.kkptrucking.com" rel="noopener" target="_blank">KKP Trucking ↗</a></p><p>KKP Web Solutions</p><p>KKP Garage &amp; Parts</p><p>KKP Foundation</p></div></div><div class="footer-bottom"><p>© 2026 Katuwang Kaagapay sa Pag-unlad Lending Corp. All Rights Reserved.</p><div aria-label="Regulatory agency references" class="reg-logos"><span>SEC</span><span>AMLC</span></div><small>Regulatory agency references only; no agency endorsement is implied. Official logo assets may be added after review.</small></div></div></footer>
 <script>const $=id=>document.getElementById(id);$('menu').addEventListener('click',()=>{$('links').classList.toggle('open')});document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>{$('links').classList.remove('open')}));document.querySelectorAll('[data-package]').forEach(a=>a.addEventListener('click',()=>{$('package').value=a.dataset.package}));$('inquiry').addEventListener('submit',async e=>{e.preventDefault();const endpoint=window.KKP_FRANCHISING_FORMSPREE_ENDPOINT||'';if(!/^https:\/\/formspree\.io\/f\/[a-zA-Z0-9]+$/.test(endpoint)){$('formStatus').textContent='Form not yet connected. Please configure a NEW Formspree endpoint for KKP Franchising before accepting inquiries.';return}const btn=$('send');btn.disabled=true;btn.textContent='Submitting...';try{const res=await fetch(endpoint,{method:'POST',body:new FormData(e.currentTarget),headers:{Accept:'application/json'}});if(!res.ok)throw new Error('Submission failed');$('inquiry').reset();$('success').style.display='block';$('success').textContent='Your inquiry has been received. A KKP representative will contact you about the next steps.';$('formStatus').textContent='Successfully submitted.'}catch(err){$('formStatus').textContent='Unable to send the inquiry. Please try again later.'}finally{btn.disabled=false;btn.textContent='Submit Franchise Inquiry →'}});</script></body></html>
-
-<style id="kkp-small-business-homepage-final">
-/* Photo-only crop from the supplied visual: navigation and cards remain native interactive HTML. */
-.kkp-hero-backdrop{background-image:linear-gradient(90deg,rgba(247,251,255,.99) 0%,rgba(247,251,255,.96) 34%,rgba(247,251,255,.67) 49%,rgba(247,251,255,.03) 72%),url('kkp-small-business-hero.jpg')!important;background-size:cover,auto 100%!important;background-position:center,right center!important}
-.kkp-hero-glass{background:rgba(255,255,255,.84)!important}
-@media(max-width:700px){.kkp-hero-backdrop{background-image:linear-gradient(180deg,rgba(247,251,255,.98) 0%,rgba(247,251,255,.95) 57%,rgba(247,251,255,.10) 100%),url('kkp-small-business-hero.jpg')!important;background-size:cover,auto 58%!important;background-position:center,right bottom!important}}
-</style>
