@@ -1,3 +1,4 @@
+```
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,13 +6,31 @@
 <title>KKP | Admin Dashboard</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f4f8fd;color:#183d6b;font:15px/1.55 Arial,sans-serif}header{background:white;border-bottom:1px solid #d9e6f5;padding:17px max(20px,calc((100vw - 1140px)/2));display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}header strong{font-size:18px;color:#0b3266}a{color:#1769c7;text-decoration:none}main{max-width:1140px;margin:35px auto;padding:0 20px}.panel{background:white;border:1px solid #d9e6f5;border-radius:16px;padding:25px;box-shadow:0 10px 35px #163c6810;margin-bottom:20px}.login{max-width:440px;margin:70px auto}h1{margin:0 0 10px;font-size:29px;color:#103b75}p{color:#617993}label{display:block;font-weight:700;margin:15px 0 6px}input,select{padding:12px;width:100%;border:1px solid #c5d7ec;border-radius:9px;font:inherit;background:white;color:#143b70}button{padding:12px 18px;border:0;border-radius:9px;background:#0966d3;color:white;font-weight:700;cursor:pointer}button:disabled{opacity:.5;cursor:wait}.muted{color:#617993;font-size:13px}.hidden{display:none!important}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:18px 0}.toolbar input{max-width:360px}.toolbar select{max-width:210px}table{border-collapse:collapse;width:100%;min-width:1170px}th,td{padding:12px 10px;text-align:left;border-bottom:1px solid #e6eef7;font-size:13px;vertical-align:top}th{background:#f2f7fd;color:#174775}tr:hover{background:#f9fbff}.scroll{overflow-x:auto}.detail{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f9fe;border:1px solid #e0ebf8;padding:15px;border-radius:10px}#message{color:#a73535}#message.ok{color:#17633c}#logout{background:white;border:1px solid #a8c7ec;color:#1769c7}.status{width:auto;min-width:130px}.assignment{min-width:185px;max-width:230px;padding:9px}.counter{font-size:22px;font-weight:bold;color:#0b3266}button.link{padding:6px 9px;background:#edf5ff;color:#0966d3}.ref{font-weight:800;color:#103b75;white-space:nowrap}.tag{display:inline-block;padding:3px 8px;border-radius:99px;background:#e8f1ff;color:#15549a;font-size:12px}.history{margin-top:16px;padding-top:12px;border-top:1px solid #d9e6f5}.history ul{padding-left:22px}.history li{margin:8px 0}#detailText{margin-top:12px}@media(max-width:600px){main{margin-top:18px}.panel{padding:18px}}
+/* Manager approval workspace */
+.manager-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.manager-controls button{padding:8px 12px}
+.manager-controls .reject{background:#fff0f0;color:#a32828;border:1px solid #e8b9b9}
+.manager-controls .approve{background:#14784b}
+.manager-table{min-width:930px}
+.manager-link{overflow-wrap:anywhere;max-width:260px}
+.manager-status{font-weight:700;text-transform:capitalize}
+.manager-status.pending{color:#9a6411}
+.manager-status.approved{color:#187449}
+.manager-status.rejected{color:#a32828}
 </style>
 </head>
 <body>
 <header><strong>KKP Lending · Administrator Portal</strong><div><a href="index.html">← Homepage</a> <button id="logout" class="hidden" style="margin-left:12px">Sign Out</button></div></header>
 <main>
 <div id="loginPanel" class="panel login"><h1>Admin Sign In</h1><p>Sign in with your authorized KKP administrator username.</p><form id="loginForm"><label for="username">Username</label><input id="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required placeholder="kkpmanager"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required><div style="margin-top:22px"><button id="signInButton" type="submit">Sign In</button></div></form><p class="muted">Only authorized administrators can access submitted applications.</p></div>
-<div id="dashboard" class="hidden"><div class="panel"><h1>Franchise Applications</h1><p>View applications, update status, and assign approved managers.</p><div class="counter"><span id="count">0</span> applications</div><div class="toolbar"><input id="search" aria-label="Search applications" placeholder="Search reference, name, email, phone, or location"><select id="filter" aria-label="Filter applications"><option value="all">All Applications</option><option value="direct">Direct Applications</option><option value="referral">Manager Referrals</option><option value="unassigned">Unassigned</option><option value="assigned">Assigned</option></select><button id="refresh">Refresh Applications</button></div><div class="scroll"><table><thead><tr><th>Reference No.</th><th>Date</th><th>Applicant</th><th>Contact</th><th>Location</th><th>Opportunity</th><th>Source</th><th>Assigned Manager</th><th>Status</th><th>Details</th></tr></thead><tbody id="rows"></tbody></table></div><p class="muted" id="managerNote"></p></div><div id="details" class="panel hidden"><h2>Application Details</h2><div id="detailText" class="detail"></div><div id="history" class="history"></div></div></div><p id="message" role="alert" aria-live="polite"></p>
+<div id="dashboard" class="hidden"><div class="panel"><h1>Franchise Applications</h1><p>View applications, update status, and assign approved managers.</p><div class="counter"><span id="count">0</span> applications</div><div class="toolbar"><input id="search" aria-label="Search applications" placeholder="Search reference, name, email, phone, or location"><select id="filter" aria-label="Filter applications"><option value="all">All Applications</option><option value="direct">Direct Applications</option><option value="referral">Manager Referrals</option><option value="unassigned">Unassigned</option><option value="assigned">Assigned</option></select><button id="refresh">Refresh Applications</button></div><div class="scroll"><table><thead><tr><th>Reference No.</th><th>Date</th><th>Applicant</th><th>Contact</th><th>Location</th><th>Opportunity</th><th>Source</th><th>Assigned Manager</th><th>Status</th><th>Details</th></tr></thead><tbody id="rows"></tbody></table></div><p class="muted" id="managerNote"></p></div><section id="managerApprovalPanel" class="panel hidden" aria-labelledby="managerApprovalTitle">
+<h2 id="managerApprovalTitle">Manager Registration &amp; Approval</h2>
+<p>Review new registrations. Only approved managers can access assigned applications. Share each approved manager's unique homepage referral link.</p>
+<div class="toolbar"><div class="counter"><span id="pendingCount">0</span> pending requests</div><button id="refreshManagers" type="button">Refresh Managers</button></div>
+<div class="scroll"><table class="manager-table"><thead><tr><th>Manager</th><th>Username</th><th>Email</th><th>Status</th><th>Registered</th><th>Referral Link</th><th>Actions</th></tr></thead><tbody id="managerRows"></tbody></table></div>
+<p id="managerMessage" class="muted" role="status" aria-live="polite"></p>
+</section>
+<div id="details" class="panel hidden"><h2>Application Details</h2><div id="detailText" class="detail"></div><div id="history" class="history"></div></div></div><p id="message" role="alert" aria-live="polite"></p>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="kkp-config.js"></script>
@@ -24,12 +43,12 @@ function msg(t,ok=false){el('message').textContent=t;el('message').classList.tog
 const ready=()=>cfg.url&&cfg.anonKey&&!cfg.anonKey.startsWith('PASTE_');
 if(ready())client=window.supabase.createClient(cfg.url,cfg.anonKey);
 else msg('Supabase configuration is missing. Update kkp-config.js before using this page.');
-function view(loggedIn){el('loginPanel').classList.toggle('hidden',loggedIn);el('dashboard').classList.toggle('hidden',!loggedIn);el('logout').classList.toggle('hidden',!loggedIn);if(!loggedIn){records=[];managers=[];isSuperAdmin=false;historyRequest++;el('rows').replaceChildren();el('details').classList.add('hidden')}}
+function view(loggedIn){el('loginPanel').classList.toggle('hidden',loggedIn);el('dashboard').classList.toggle('hidden',!loggedIn);el('logout').classList.toggle('hidden',!loggedIn);if(!loggedIn){records=[];managers=[];isSuperAdmin=false;historyRequest++;el('rows').replaceChildren();el('details').classList.add('hidden');el('managerApprovalPanel').classList.add('hidden');el('managerRows').replaceChildren()}}
 async function authorized(){const {data:{user},error}=await client.auth.getUser();if(error||!user)return false;const {data,error:e}=await client.from('franchising_admins').select('user_id,role').eq('user_id',user.id).maybeSingle();if(e||!data)return false;const {data:profile,error:pe}=await client.from('kkp_manager_profiles').select('role,approval_status').eq('user_id',user.id).maybeSingle();isSuperAdmin=!pe&&data.role==='super_admin'&&profile?.role==='super_admin'&&profile?.approval_status==='approved';return true}
-async function initialize(){if(!client)return;const {data}=await client.auth.getSession();if(!data.session){view(false);return}if(!(await authorized())){await client.auth.signOut();view(false);msg('This account is not authorized as an administrator.');return}view(true);await load()}
+async function initialize(){if(!client)return;const {data}=await client.auth.getSession();if(!data.session){view(false);return}if(!(await authorized())){await client.auth.signOut();view(false);msg('This account is not authorized as an administrator.');return}view(true);el('managerApprovalPanel').classList.toggle('hidden',!isSuperAdmin);await load()}
 el('loginForm').addEventListener('submit',async e=>{e.preventDefault();msg('');if(!client)return;const button=el('signInButton');button.disabled=true;try{const response=await fetch('/api/admin-login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:el('username').value.trim(),password:el('password').value})});const result=await response.json();if(!response.ok||!result.access_token||!result.refresh_token){msg('Sign-in failed. Check your username and password.');return}const {error}=await client.auth.setSession({access_token:result.access_token,refresh_token:result.refresh_token});if(error){msg('Unable to start a session. Please try again.');return}el('password').value='';await initialize()}catch(err){msg('Sign-in service unavailable. Check that the Cloudflare Pages Function is deployed.')}finally{button.disabled=false}});
 el('logout').addEventListener('click',async()=>{if(client)await client.auth.signOut();view(false);msg('Signed out.')});
-async function load(){msg('');const {data,error}=await client.from('franchise_applications').select('id,reference_number,created_at,applicant_name,email,phone,package_type,preferred_location,message,status,manager_id,manager_referral_code').order('created_at',{ascending:false}).limit(500);if(error){msg('Unable to load applications. Check your admin permissions and database setup.');return}records=data||[];if(isSuperAdmin){const result=await client.from('kkp_manager_profiles').select('user_id,full_name,email,approval_status').eq('role','manager').order('full_name');if(result.error){managers=[];msg('Applications loaded, but manager list could not be loaded.')}else managers=result.data||[]}else managers=[];el('managerNote').textContent=isSuperAdmin?'Only approved managers can be selected. Assignment changes are saved to the audit history.':'Manager assignment is available to Super Admin only.';render()}
+async function load(){msg('');const {data,error}=await client.from('franchise_applications').select('id,reference_number,created_at,applicant_name,email,phone,package_type,preferred_location,message,status,manager_id,manager_referral_code').order('created_at',{ascending:false}).limit(500);if(error){msg('Unable to load applications. Check your admin permissions and database setup.');return}records=data||[];if(isSuperAdmin){const result=await client.from('kkp_manager_profiles').select('user_id,full_name,email,username,approval_status,referral_code,created_at').eq('role','manager').order('full_name');if(result.error){managers=[];msg('Applications loaded, but manager list could not be loaded.')}else managers=result.data||[]}else managers=[];el('managerNote').textContent=isSuperAdmin?'Only approved managers can be selected. Assignment changes are saved to the audit history.':'Manager assignment is available to Super Admin only.';render();if(isSuperAdmin)renderManagers()}
 const managerName=id=>managers.find(m=>m.user_id===id)?.full_name||'Unknown / inactive manager';
 function sourceLabel(r){return r.manager_referral_code?'Manager Referral':'Direct'}
 function filteredRecords(){const q=el('search').value.trim().toLowerCase(),f=el('filter').value;return records.filter(r=>{const match=[r.reference_number,r.applicant_name,r.email,r.phone,r.preferred_location,r.manager_referral_code,managerName(r.manager_id)].some(v=>String(v||'').toLowerCase().includes(q));const filter=f==='all'||(f==='direct'&&!r.manager_referral_code)||(f==='referral'&&!!r.manager_referral_code)||(f==='unassigned'&&!r.manager_id)||(f==='assigned'&&!!r.manager_id);return match&&filter})}
@@ -38,7 +57,49 @@ const assignedTd=document.createElement('td');if(isSuperAdmin){const sel=documen
 const statusTd=document.createElement('td'),statusSelect=document.createElement('select');statusSelect.className='status';for(const s of ['New','Under Review','Approved','Declined']){const o=document.createElement('option');o.value=s;o.textContent=s;statusSelect.append(o)}statusSelect.value=r.status;statusSelect.addEventListener('change',async()=>{const newStatus=statusSelect.value;statusSelect.disabled=true;const {error}=await client.from('franchise_applications').update({status:newStatus}).eq('id',r.id);statusSelect.disabled=false;if(error){statusSelect.value=r.status;msg('Unable to update status.')}else{r.status=newStatus;msg('Status updated.',true)}});statusTd.append(statusSelect);tr.append(statusTd);
 const td=document.createElement('td'),btn=document.createElement('button');btn.className='link';btn.textContent='View';btn.addEventListener('click',()=>showDetails(r,true));td.append(btn);tr.append(td);body.append(tr)}}
 async function showDetails(r,scroll=false){el('details').dataset.applicationId=r.id;el('detailText').textContent=['Reference Number: '+(r.reference_number||'Not assigned'),'Applicant: '+r.applicant_name,'Email: '+r.email,'Phone: '+r.phone,'Location: '+r.preferred_location,'Opportunity: '+r.package_type,'Package: '+r.package_type,'Status: '+r.status,'Source: '+sourceLabel(r),'Original referral code: '+(r.manager_referral_code||'—'),'Currently assigned manager: '+(r.manager_id?managerName(r.manager_id):'Unassigned'),'Submitted: '+new Date(r.created_at).toLocaleString(),'','Message:',r.message||'—'].join('\n');el('details').classList.remove('hidden');if(scroll)el('details').scrollIntoView({behavior:'smooth'});const hist=el('history');hist.replaceChildren();if(!isSuperAdmin)return;const request=++historyRequest;const heading=document.createElement('h3');heading.textContent='Assignment History';hist.append(heading);const note=document.createElement('p');note.className='muted';note.textContent='Loading assignment history…';hist.append(note);const {data,error}=await client.rpc('kkp_get_assignment_history',{p_application_id:r.id});if(request!==historyRequest||el('details').dataset.applicationId!==r.id)return;if(error){note.textContent='History unavailable until the secure history-reading function is installed.';return}note.remove();if(!data?.length){const p=document.createElement('p');p.className='muted';p.textContent='No manual assignment changes yet.';hist.append(p);return}const ul=document.createElement('ul');for(const entry of data){const li=document.createElement('li');const from=entry.previous_manager_name||'Unassigned',to=entry.new_manager_name||'Unassigned';li.textContent=new Date(entry.assigned_at).toLocaleString()+' — '+from+' → '+to;ul.append(li)}hist.append(ul)}
+
+function renderManagers(){
+ const body=el('managerRows');body.replaceChildren();
+ const sorted=[...managers].sort((a,b)=>(a.approval_status==='pending'?0:1)-(b.approval_status==='pending'?0:1)||new Date(b.created_at)-new Date(a.created_at));
+ el('pendingCount').textContent=managers.filter(m=>m.approval_status==='pending').length;
+ if(!sorted.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=7;td.textContent='No manager registrations found.';tr.append(td);body.append(tr);return}
+ for(const m of sorted){
+  const tr=document.createElement('tr');
+  function cell(v){const td=document.createElement('td');td.textContent=v||'—';tr.append(td);return td}
+  cell(m.full_name);cell(m.username);cell(m.email);
+  const st=cell(m.approval_status);st.className='manager-status '+m.approval_status;
+  cell(m.created_at?new Date(m.created_at).toLocaleString():'');
+  const linkCell=document.createElement('td');linkCell.className='manager-link';
+  if(m.approval_status==='approved'&&/^KKP-[A-F0-9]{16}$/.test(m.referral_code||'')){
+   const link='https://kkpfranchise.com/?ref='+encodeURIComponent(m.referral_code);
+   const a=document.createElement('a');a.href=link;a.target='_blank';a.rel='noopener noreferrer';a.textContent=link;linkCell.append(a);
+   const copy=document.createElement('button');copy.type='button';copy.className='link';copy.textContent='Copy Link';copy.style.marginTop='6px';
+   copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(link);el('managerMessage').textContent='Referral link copied.'}catch(_){el('managerMessage').textContent='Unable to copy automatically. Please select and copy the link.'}});
+   linkCell.append(document.createElement('br'),copy);
+  }else linkCell.textContent=m.approval_status==='approved'?'Referral code unavailable':'Available after approval';
+  tr.append(linkCell);
+  const action=document.createElement('td'),controls=document.createElement('div');controls.className='manager-controls';
+  if(m.approval_status==='pending'){
+   for(const [decision,label] of [['approved','Approve'],['rejected','Reject']]){
+    const btn=document.createElement('button');btn.type='button';btn.textContent=label;btn.className=decision==='approved'?'approve':'reject';
+    btn.addEventListener('click',async()=>{
+     if(!window.confirm((decision==='approved'?'Approve ':'Reject ')+m.full_name+' ('+m.username+')?'))return;
+     btn.disabled=true;controls.querySelectorAll('button').forEach(b=>b.disabled=true);
+     const {error}=await client.rpc('kkp_review_manager',{p_manager_id:m.user_id,p_decision:decision});
+     if(error){el('managerMessage').textContent='Unable to review manager: '+error.message;controls.querySelectorAll('button').forEach(b=>b.disabled=false);return}
+     el('managerMessage').textContent='Manager '+decision+' successfully.';
+     await load();
+    });
+    controls.append(btn);
+   }
+  }else controls.textContent='Reviewed';
+  action.append(controls);tr.append(action);body.append(tr);
+ }
+}
+el('refreshManagers').addEventListener('click',async()=>{if(isSuperAdmin)await load()});
+
 el('search').addEventListener('input',render);el('filter').addEventListener('change',render);el('refresh').addEventListener('click',load);initialize();
 </script>
 </body>
 </html>
+```
