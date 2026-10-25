@@ -61,6 +61,11 @@ document.getElementById('inquiry').addEventListener('submit', async function(e){
  const note=String(form.get('message')||'').trim();
  const message=`Opportunity: License Sharing\nPreferred follow-up date: ${date}\nPreferred follow-up time: ${time} PHT (UTC+8)\n${note ? 'Additional details: '+note : ''}`;
  if(message.length>3000){status.textContent='Additional details are too long. Please shorten your message.';return;}
+ const referralCode=new URLSearchParams(window.location.search).get('ref');
+ if(referralCode!==null && !/^KKP-[A-F0-9]{16}$/.test(referralCode)){
+  status.textContent='Invalid manager referral link. Please request a valid link from your KKP manager.';
+  return;
+ }
  const token=String(form.get('cf-turnstile-response')||'');
  if(!token){status.textContent='Please complete the security verification before submitting.';return;}
  const button=document.getElementById('send');
@@ -74,7 +79,7 @@ document.getElementById('inquiry').addEventListener('submit', async function(e){
     email:String(form.get('email')||'').trim(),
     phone:String(form.get('phone')||'').trim(),
     location:String(form.get('location')||'').trim(),
-    message,turnstileToken:token
+    message,turnstileToken:token,referralCode
    })
   });
   const result=await response.json().catch(()=>({}));
