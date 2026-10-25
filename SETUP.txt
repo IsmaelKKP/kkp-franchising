@@ -1,0 +1,20 @@
+KKP USERNAME LOGIN SETUP
+
+1. Upload admin.html to the repository root, replacing your existing admin.html.
+2. Upload functions/api/admin-login.js, preserving the exact folder structure.
+3. In Cloudflare Dashboard > Workers & Pages > your Pages project > Settings > Variables and Secrets, add:
+   ADMIN_LOGIN_USERNAME = kkpmanager
+   ADMIN_LOGIN_EMAIL = the email address of your existing Supabase administrator account
+   SUPABASE_URL = the URL already in kkp-config.js
+   SUPABASE_ANON_KEY = the publishable/anon key already in kkp-config.js
+   Set for Production (and Preview if testing preview deployments).
+4. Redeploy your Pages project so the function receives the variables.
+5. Test at https://kkp-franchising.pages.dev/admin.html with username kkpmanager and your existing password.
+6. Confirm the franchise application dashboard loads and sign-out works.
+
+IMPORTANT
+- Do not add your administrator password or Supabase service-role key to the website or Cloudflare variables.
+- Your previous public.admin_usernames table is not used by this implementation; the username-to-email mapping is kept in Cloudflare environment variables.
+- This implementation preserves Supabase's existing authentication and franchising_admins authorization check.
+- Consider enabling Supabase MFA and Cloudflare rate limiting/WAF for /api/admin-login against password guessing.
+- Functions must be deployed using a Cloudflare Pages deployment method that supports a functions/ directory. Direct browser file uploads may not deploy Functions.
