@@ -61,7 +61,15 @@ document.getElementById('inquiry').addEventListener('submit', async function(e){
  const note=String(form.get('message')||'').trim();
  const message=`Opportunity: License Sharing\nPreferred follow-up date: ${date}\nPreferred follow-up time: ${time} PHT (UTC+8)\n${note ? 'Additional details: '+note : ''}`;
  if(message.length>3000){status.textContent='Additional details are too long. Please shorten your message.';return;}
- const referralCode=new URLSearchParams(window.location.search).get('ref');
+ const referralFromUrl = new URLSearchParams(window.location.search).get('ref');
+ let referralCode = referralFromUrl;
+ if (referralFromUrl === null) {
+  try { referralCode = sessionStorage.getItem('kkp_manager_referral'); } catch (_) {}
+ } else if (/^KKP-[A-F0-9]{16}$/.test(referralFromUrl)) {
+  try { sessionStorage.setItem('kkp_manager_referral', referralFromUrl); } catch (_) {}
+ } else {
+  try { sessionStorage.removeItem('kkp_manager_referral'); } catch (_) {}
+ }
  if(referralCode!==null && !/^KKP-[A-F0-9]{16}$/.test(referralCode)){
   status.textContent='Invalid manager referral link. Please request a valid link from your KKP manager.';
   return;

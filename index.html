@@ -1,3 +1,4 @@
+```
 <!DOCTYPE html>
 
 <html lang="en"><head><link rel="icon" type="image/png" href="kkp-new-logo.png"><link rel="apple-touch-icon" href="kkp-new-logo.png"><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="#071d43" name="theme-color"/><meta content="KKP Franchising Lending — explore lending branch franchising and license-sharing opportunities." name="description"/><title>Katuwang Kaagapay sa Pag-unlad Lending Corp. | Franchising</title><style>
@@ -928,4 +929,61 @@ body.kkp-high-contrast :focus-visible{outline:3px solid #f59e0b!important;outlin
   apply();
 })();
 </script>
+
+<script>
+/* KKP manager referral attribution: homepage -> application form */
+(function () {
+  'use strict';
+  const key = 'kkp_manager_referral';
+  const pattern = /^KKP-[A-F0-9]{16}$/;
+  const params = new URLSearchParams(window.location.search);
+  const supplied = params.get('ref');
+  let referral = null;
+
+  if (supplied !== null) {
+    if (pattern.test(supplied)) {
+      referral = supplied;
+      try { sessionStorage.setItem(key, supplied); } catch (_) {}
+    } else {
+      try { sessionStorage.removeItem(key); } catch (_) {}
+      return; // Invalid codes must not be silently attached to applications.
+    }
+  } else {
+    try {
+      const saved = sessionStorage.getItem(key);
+      if (saved && pattern.test(saved)) referral = saved;
+    } catch (_) {}
+  }
+
+  if (!referral) return;
+  function updateApplyLinks() {
+    document.querySelectorAll('a[href]').forEach(function (anchor) {
+      const raw = anchor.getAttribute('href');
+      if (!raw) return;
+      try {
+        const url = new URL(raw, window.location.href);
+        if (url.origin !== window.location.origin ||
+            !/\/apply\.html$/i.test(url.pathname)) return;
+        url.searchParams.set('ref', referral);
+        anchor.href = url.href;
+      } catch (_) {}
+    });
+  }
+  updateApplyLinks();
+  document.addEventListener('click', function (event) {
+    const anchor = event.target.closest && event.target.closest('a[href]');
+    if (!anchor) return;
+    try {
+      const url = new URL(anchor.href, window.location.href);
+      if (url.origin === window.location.origin &&
+          /\/apply\.html$/i.test(url.pathname)) {
+        url.searchParams.set('ref', referral);
+        anchor.href = url.href;
+      }
+    } catch (_) {}
+  }, true);
+})();
+</script>
+
 </body></html>
+```
