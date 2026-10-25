@@ -842,4 +842,75 @@ section.section#calculator .kkp-center .btn:hover{background:#2475d7!important}
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!panel.hidden){panel.hidden=true;button.setAttribute('aria-expanded','false');button.textContent='💬 Need Help?';}});
 })();
 </script>
+
+<!-- KKP Accessibility Controls: independent of the existing Messenger widget -->
+<style id="kkp-accessibility-styles">
+#kkp-accessibility-widget{position:fixed;right:20px;bottom:89px;z-index:10000;font-family:Inter,Segoe UI,Arial,sans-serif;color:#163a70}
+#kkp-accessibility-toggle{display:flex;align-items:center;justify-content:center;gap:8px;margin-left:auto;min-width:48px;min-height:48px;padding:10px 14px;border:2px solid #fff;border-radius:999px;background:#0a4c9e;color:#fff;font-weight:800;font-size:14px;box-shadow:0 8px 24px #092b5660;cursor:pointer}
+#kkp-accessibility-panel{width:min(310px,calc(100vw - 24px));margin-bottom:10px;padding:18px;border:1px solid #b9cde9;border-radius:16px;background:#fff;color:#173d73;box-shadow:0 12px 36px #092b5650}
+#kkp-accessibility-panel[hidden]{display:none!important}
+#kkp-accessibility-panel h2{margin:0 0 8px;font-size:19px;color:#0b397b}
+#kkp-accessibility-panel p{margin:0 0 12px;font-size:13px;color:#3b577b}
+.kkp-a11y-row{display:flex;gap:7px;margin:8px 0 15px}
+.kkp-a11y-row button,#kkp-a11y-reset{flex:1;min-height:42px;padding:9px;border:1px solid #9bbbe0;border-radius:8px;background:#f2f7ff;color:#123e7d;font-weight:750;cursor:pointer}
+.kkp-a11y-row button[aria-pressed="true"]{background:#0a4c9e;color:#fff;border-color:#0a4c9e}
+.kkp-a11y-check{display:flex;align-items:center;gap:10px;margin:8px 0 15px;font-size:14px;font-weight:700;cursor:pointer}
+.kkp-a11y-check input{width:20px;height:20px;accent-color:#0a4c9e}
+#kkp-accessibility-widget button:focus-visible,#kkp-accessibility-widget input:focus-visible{outline:3px solid #e0a72d;outline-offset:3px}
+/* Enlarge readable page text without altering calculator arithmetic or input values. */
+body.kkp-text-large main p,body.kkp-text-large main li,body.kkp-text-large main summary,body.kkp-text-large main small,body.kkp-text-large footer p,body.kkp-text-large footer a,body.kkp-text-large .links a{font-size:1.15em!important;line-height:1.75!important}
+body.kkp-text-larger main p,body.kkp-text-larger main li,body.kkp-text-larger main summary,body.kkp-text-larger main small,body.kkp-text-larger footer p,body.kkp-text-larger footer a,body.kkp-text-larger .links a{font-size:1.3em!important;line-height:1.85!important}
+body.kkp-text-large main h1,body.kkp-text-large main h2,body.kkp-text-large main h3{letter-spacing:normal!important}
+body.kkp-text-larger main h1,body.kkp-text-larger main h2,body.kkp-text-larger main h3{letter-spacing:normal!important}
+/* High-contrast mode applies to page content; preserve photos, icons and the accessibility controls. */
+body.kkp-high-contrast main,body.kkp-high-contrast section,body.kkp-high-contrast .hero,body.kkp-high-contrast .nav,body.kkp-high-contrast .footer{background:#fff!important;color:#111!important}
+body.kkp-high-contrast main p,body.kkp-high-contrast main h1,body.kkp-high-contrast main h2,body.kkp-high-contrast main h3,body.kkp-high-contrast main li,body.kkp-high-contrast main summary,body.kkp-high-contrast main small,body.kkp-high-contrast .nav a,body.kkp-high-contrast .footer p,body.kkp-high-contrast .footer a{color:#111!important;text-shadow:none!important}
+body.kkp-high-contrast .card,body.kkp-high-contrast .kkp-mini,body.kkp-high-contrast .kkp-faq details,body.kkp-high-contrast .price-card{background:#fff!important;color:#111!important;border:2px solid #111!important}
+body.kkp-high-contrast a:not(.btn){text-decoration:underline;text-underline-offset:3px}
+body.kkp-high-contrast :focus-visible{outline:3px solid #f59e0b!important;outline-offset:3px!important}
+@media(max-width:620px){#kkp-accessibility-widget{right:12px;bottom:78px}#kkp-accessibility-toggle{padding:9px 12px;font-size:13px}#kkp-accessibility-panel{max-height:65vh;overflow:auto}}
+@media print{#kkp-accessibility-widget{display:none!important}}
+</style>
+<div id="kkp-accessibility-widget">
+  <div id="kkp-accessibility-panel" role="region" aria-label="Accessibility settings" hidden>
+    <h2>Accessibility Settings</h2>
+    <p>Adjust the website display to suit your needs.</p>
+    <strong id="kkp-a11y-size-label">Text size</strong>
+    <div class="kkp-a11y-row" role="group" aria-labelledby="kkp-a11y-size-label">
+      <button type="button" data-kkp-size="normal" aria-pressed="true">A Normal</button>
+      <button type="button" data-kkp-size="large" aria-pressed="false">A+</button>
+      <button type="button" data-kkp-size="larger" aria-pressed="false">A++</button>
+    </div>
+    <label class="kkp-a11y-check"><input id="kkp-a11y-contrast" type="checkbox"> High contrast mode</label>
+    <button id="kkp-a11y-reset" type="button">Reset settings</button>
+  </div>
+  <button id="kkp-accessibility-toggle" type="button" aria-label="Open accessibility settings" aria-controls="kkp-accessibility-panel" aria-expanded="false">♿ Accessibility</button>
+</div>
+<script>
+(function(){
+  const panel=document.getElementById('kkp-accessibility-panel');
+  const toggle=document.getElementById('kkp-accessibility-toggle');
+  const contrast=document.getElementById('kkp-a11y-contrast');
+  const sizeButtons=Array.from(panel.querySelectorAll('[data-kkp-size]'));
+  const storageKey='kkp-accessibility-preferences-v1';
+  let prefs={size:'normal',contrast:false};
+  try {const saved=JSON.parse(localStorage.getItem(storageKey)||'null');if(saved&&['normal','large','larger'].includes(saved.size)){prefs={size:saved.size,contrast:saved.contrast===true}}}catch(e){}
+  function apply(){
+    document.body.classList.toggle('kkp-text-large',prefs.size==='large');
+    document.body.classList.toggle('kkp-text-larger',prefs.size==='larger');
+    document.body.classList.toggle('kkp-high-contrast',prefs.contrast);
+    contrast.checked=prefs.contrast;
+    sizeButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.kkpSize===prefs.size)));
+    try{localStorage.setItem(storageKey,JSON.stringify(prefs))}catch(e){}
+  }
+  function setOpen(open){panel.hidden=!open;toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Close accessibility settings':'Open accessibility settings');if(open)sizeButtons[0].focus()}
+  toggle.addEventListener('click',()=>setOpen(panel.hidden));
+  sizeButtons.forEach(b=>b.addEventListener('click',()=>{prefs.size=b.dataset.kkpSize;apply()}));
+  contrast.addEventListener('change',()=>{prefs.contrast=contrast.checked;apply()});
+  document.getElementById('kkp-a11y-reset').addEventListener('click',()=>{prefs={size:'normal',contrast:false};apply()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden){setOpen(false);toggle.focus()}});
+  document.addEventListener('click',e=>{if(!panel.hidden&&!e.target.closest('#kkp-accessibility-widget'))setOpen(false)});
+  apply();
+})();
+</script>
 </body></html>
