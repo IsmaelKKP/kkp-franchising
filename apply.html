@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="KKP Lending franchise partnership application">
-<title>Franchise Application | KKP Lending</title>
+<meta name="description" content="KKP Lending license sharing partnership application">
+<title>License Sharing Application | KKP Lending</title>
 <style>
 :root{--navy:#103b75;--blue:#0966d3;--line:#d8e6f6;--ink:#183b67}
 *{box-sizing:border-box}body{margin:0;background:#f5f9fe;color:var(--ink);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.6}
@@ -18,6 +18,7 @@ h1{font-size:clamp(30px,4.5vw,45px);line-height:1.14;color:var(--navy);margin:10
 .field label{font-size:13px;color:var(--navy);font-weight:800}
 .field input,.field select,.field textarea{width:100%;padding:13px 14px;border:1px solid #bdd1e9;border-radius:9px;font:inherit;background:white;color:#153b68}
 .field input:focus,.field select:focus,.field textarea:focus{outline:2px solid #77b0f6}
+.field input[readonly]{background:#f5f9fe;color:#103b75;font-weight:700}
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 19px;border-radius:9px;font-weight:800;font-size:14px;border:1px solid var(--blue);background:var(--blue);color:white;cursor:pointer}
 .btn.secondary{background:white;color:var(--blue)}.actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:20px}
 .small{font-size:12px;color:#607995}.success{display:none;padding:14px;margin-top:12px;background:#e8f7ee;border:1px solid #9cd6ae;border-radius:9px;color:#17623c}
@@ -25,19 +26,26 @@ footer{text-align:center;color:#69809a;padding:20px;font-size:12px}
 @media(max-width:650px){.calc-grid{grid-template-columns:1fr}.header-inner{flex-wrap:wrap}main{margin-top:28px}}
 </style></head><body>
 <header><div class="header-inner"><a class="brand" href="index.html">
-<img src="kkp-new-logo.png" alt="KKP logo"><span>Katuwang Kaagapay sa Pag-unlad Lending Corp.<small>FRANCHISING &amp; BUSINESS PARTNERSHIPS</small></span></a>
+<img src="kkp-new-logo.png" alt="KKP logo"><span>Katuwang Kaagapay sa Pag-unlad Lending Corp.<small>LICENSE SHARING &amp; BUSINESS PARTNERSHIPS</small></span></a>
 <a class="btn secondary" href="index.html">← Back to Homepage</a></div></header>
 <main><div class="intro"><div class="eyebrow">BECOME A KKP PARTNER</div>
-<h1>Franchise Partnership Application</h1>
-<p>Interested in operating a KKP lending branch? Complete the application inquiry below. You may also explore the feasibility calculator before submitting.</p>
+<h1>License Sharing Application</h1>
+<p>Interested in becoming a KKP License Sharing partner? Complete the application inquiry below. You may also explore the feasibility calculator before submitting.</p>
 <div class="actions"><a class="btn secondary" href="calculator.html" target="_blank" rel="noopener">View Feasibility Calculator ↗</a><a class="btn secondary" href="index.html">← Return Home</a></div></div>
 <div class="card"><h2 style="margin:0 0 7px;color:#103b75">Applicant Information</h2>
-<p style="margin:0 0 25px;color:#657d97;font-size:14px">Standard Franchise Package: ₱3,000,000 all-inclusive. Fields marked * are required.</p>
-<form id="inquiry"><div class="calc-grid"><div class="field"><label for="name">Full name *</label><input autocomplete="name" id="name" name="name" required=""/></div><div class="field"><label for="email">Email address *</label><input autocomplete="email" id="email" name="email" required="" type="email"/></div><div class="field"><label for="phone">Contact number *</label><input autocomplete="tel" id="phone" name="phone" required=""/></div><div class="field"><label for="program">Opportunity *</label><select id="program" name="program" required=""><option value="">Select opportunity</option><option>Lending Branch Franchising</option><option>License Sharing</option></select></div><div class="field"><label for="package">Preferred package</label><select id="package" name="package"><option value="">To be discussed</option><option>Standard Package — ₱3,000,000 all-inclusive</option></select></div><div class="field"><label for="place">Preferred location *</label><input id="place" name="location" placeholder="City, Province" required=""/></div></div><div class="field" style="margin-top:18px"><label for="message">Questions or additional details</label><textarea id="message" name="message" placeholder="Tell us about your business plans..." rows="4"></textarea></div><label style="display:flex;gap:10px;margin:18px 0;font-size:13px;color:#556780"><input required="" style="width:auto" type="checkbox"/> I consent to being contacted regarding this inquiry and understand my information will be used for application follow-up.</label><button class="btn" id="send" type="submit">Submit Franchise Inquiry →</button><p class="small" id="formStatus">Your application will be submitted securely to KKP after the database is configured.</p><div class="success" id="success" role="status"></div></form></div>
+<p style="margin:0 0 25px;color:#657d97;font-size:14px">Standard Package: ₱3,000,000 all-inclusive. Fields marked * are required.</p>
+<form id="inquiry"><div class="calc-grid"><div class="field"><label for="name">Full name *</label><input autocomplete="name" id="name" name="name" required></div><div class="field"><label for="email">Email address *</label><input autocomplete="email" id="email" name="email" required type="email"></div><div class="field"><label for="phone">Contact number *</label><input autocomplete="tel" id="phone" name="phone" required></div><div class="field"><label for="program">Opportunity *</label><input id="program" name="program" value="License Sharing" readonly aria-readonly="true"></div><div class="field"><label for="package">Preferred package</label><select id="package" name="package"><option value="">To be discussed</option><option>Standard Package — ₱3,000,000 all-inclusive</option></select></div><div class="field"><label for="place">Preferred location *</label><input id="place" name="location" placeholder="City, Province" required></div><div class="field"><label for="followup_date">Preferred follow-up date *</label><input id="followup_date" name="followup_date" type="date" required></div><div class="field"><label for="followup_time">Preferred follow-up time *</label><input id="followup_time" name="followup_time" type="time" required></div></div><p class="small" style="margin:10px 0 0">Follow-up schedule is in Philippine Time (PHT, UTC+8), subject to confirmation by KKP.</p><div class="field" style="margin-top:18px"><label for="message">Questions or additional details</label><textarea id="message" name="message" placeholder="Tell us about your business plans..." rows="4"></textarea></div><label style="display:flex;gap:10px;margin:18px 0;font-size:13px;color:#556780"><input required style="width:auto" type="checkbox"> I consent to being contacted regarding this inquiry and understand my information will be used for application follow-up.</label><button class="btn" id="send" type="submit">Submit License Sharing Inquiry →</button><p class="small" id="formStatus">Your application will be submitted securely to KKP.</p><div class="success" id="success" role="status"></div></form></div>
 </main><footer>© 2026 KKP Lending Corp. · Application inquiries are subject to review and approval.</footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="kkp-config.js"></script>
 <script>
+// Date input uses the Philippines' calendar date to prevent past requests.
+const followupDateInput=document.getElementById('followup_date');
+function updateMinimumFollowupDate(){
+ const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Manila',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+ followupDateInput.min=today;
+}
+updateMinimumFollowupDate();
 document.getElementById('inquiry').addEventListener('submit', async function(e){
 e.preventDefault();
 const config=window.KKP_SUPABASE || {};
@@ -49,19 +57,27 @@ if(!config.url || !config.anonKey || config.anonKey.startsWith('PASTE_')){
 const button=document.getElementById('send');button.disabled=true;button.textContent='Submitting...';
 try{
  const form = new FormData(this);
+ updateMinimumFollowupDate();
+ if(!this.reportValidity()){button.disabled=false;button.textContent='Submit License Sharing Inquiry →';return;}
+ const date=String(form.get('followup_date')||'');
+ const time=String(form.get('followup_time')||'');
+ const note=String(form.get('message')||'').trim();
+ // Keep the existing 5-argument Supabase RPC intact; store scheduling details in its message field.
+ const applicationDetails=`Opportunity: License Sharing\nPreferred follow-up date: ${date}\nPreferred follow-up time: ${time} PHT (UTC+8)\n${note ? 'Additional details: '+note : ''}`;
+ if(applicationDetails.length>3000){throw new Error('Message too long');}
  const client=window.supabase.createClient(config.url,config.anonKey);
  const {error}=await client.rpc('submit_franchise_application', {
   p_applicant_name:String(form.get('name')||'').trim(),
   p_email:String(form.get('email')||'').trim(),
   p_phone:String(form.get('phone')||'').trim(),
   p_preferred_location:String(form.get('location')||'').trim(),
-  p_message:String(form.get('message')||'').trim()
+  p_message:applicationDetails
  });
  if(error)throw error;
  this.reset();document.getElementById('success').style.display='block';
- document.getElementById('success').textContent='Your application inquiry was submitted successfully.';
+ document.getElementById('success').textContent='Your License Sharing inquiry was submitted successfully.';
  status.textContent='Submission complete.';
 }catch(err){status.textContent='Unable to submit your application. Please try again later.'}
-finally{button.disabled=false;button.textContent='Submit Franchise Inquiry →'}
+finally{button.disabled=false;button.textContent='Submit License Sharing Inquiry →'}
 });
 </script></body></html>
