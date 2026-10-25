@@ -1,7 +1,21 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KKP | Manager Dashboard</title>
-<style>*{box-sizing:border-box}body{margin:0;background:#f2f7fe;color:#173e70;font:15px/1.55 Arial,sans-serif}header{background:white;border-bottom:1px solid #d9e6f5;padding:17px max(20px,calc((100vw - 1120px)/2));display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}a{color:#0967c9;text-decoration:none}main{max-width:1120px;margin:28px auto;padding:0 18px}.panel{background:#fff;border:1px solid #d8e6f6;border-radius:16px;padding:25px;margin-bottom:20px;box-shadow:0 9px 30px #173c6b0b}.hidden{display:none!important}h1{font-size:27px;margin:0 0 6px}h2{font-size:20px;margin:0 0 12px}p{color:#647b95}button{background:#0968d5;border:0;color:white;border-radius:9px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer}button:disabled{opacity:.6}.ghost{background:#fff;border:1px solid #bcd1e8;color:#125ba9}.referral{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.referral input{min-width:240px;flex:1;border:1px solid #bfd5ed;border-radius:9px;padding:12px;font:inherit;color:#16406f}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0}.stat{background:#eff6ff;border-radius:12px;padding:17px}.stat b{display:block;font-size:26px}.stat span{font-size:13px;color:#5d7898}.scroll{overflow:auto}table{width:100%;min-width:850px;border-collapse:collapse}th,td{padding:13px 10px;border-bottom:1px solid #e4edf8;text-align:left;font-size:13px}th{background:#f1f7fe}.toolbar{display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin:15px 0}#message{color:#a52d2d}#message.ok{color:#17764b}.small{font-size:13px;color:#607b99}.detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:16px 0}.detail-item{padding:12px;background:#f5f9fe;border:1px solid #e1ebf7;border-radius:9px;overflow-wrap:anywhere}.detail-item strong{display:block;font-size:12px;color:#607b99;margin-bottom:4px}.detail-message{white-space:pre-wrap;overflow-wrap:anywhere}.view-btn{padding:7px 11px;font-size:13px}.detail-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.password-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.password-grid label{display:block;font-weight:700;font-size:13px;margin:0 0 6px}.password-grid input{width:100%;padding:12px;border:1px solid #bfd5ed;border-radius:9px;font:inherit;color:#16406f}.password-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:15px}.password-status{font-size:13px;margin-top:10px;white-space:pre-wrap}.password-status.ok{color:#17764b}.password-status.err{color:#a52d2d}@media(max-width:600px){.panel{padding:17px}main{margin-top:16px}}</style></head><body>
-<header><strong>KKP Lending · Manager Portal</strong><div><a href="index.html">Homepage</a> <button id="logout" class="ghost hidden" type="button" style="margin-left:12px">Sign Out</button></div></header>
+<style>*{box-sizing:border-box}body{margin:0;background:#f2f7fe;color:#173e70;font:15px/1.55 Arial,sans-serif}header{background:white;border-bottom:1px solid #d9e6f5;padding:17px max(20px,calc((100vw - 1120px)/2));display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}a{color:#0967c9;text-decoration:none}main{max-width:1120px;margin:28px auto;padding:0 18px}.panel{background:#fff;border:1px solid #d8e6f6;border-radius:16px;padding:25px;margin-bottom:20px;box-shadow:0 9px 30px #173c6b0b}.hidden{display:none!important}h1{font-size:27px;margin:0 0 6px}h2{font-size:20px;margin:0 0 12px}p{color:#647b95}button{background:#0968d5;border:0;color:white;border-radius:9px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer}button:disabled{opacity:.6}.ghost{background:#fff;border:1px solid #bcd1e8;color:#125ba9}.referral{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.referral input{min-width:240px;flex:1;border:1px solid #bfd5ed;border-radius:9px;padding:12px;font:inherit;color:#16406f}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0}.stat{background:#eff6ff;border-radius:12px;padding:17px}.stat b{display:block;font-size:26px}.stat span{font-size:13px;color:#5d7898}.scroll{overflow:auto}table{width:100%;min-width:850px;border-collapse:collapse}th,td{padding:13px 10px;border-bottom:1px solid #e4edf8;text-align:left;font-size:13px}th{background:#f1f7fe}.toolbar{display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin:15px 0}#message{color:#a52d2d}#message.ok{color:#17764b}.small{font-size:13px;color:#607b99}.detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:16px 0}.detail-item{padding:12px;background:#f5f9fe;border:1px solid #e1ebf7;border-radius:9px;overflow-wrap:anywhere}.detail-item strong{display:block;font-size:12px;color:#607b99;margin-bottom:4px}.detail-message{white-space:pre-wrap;overflow-wrap:anywhere}.view-btn{padding:7px 11px;font-size:13px}.detail-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.password-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.password-grid label{display:block;font-weight:700;font-size:13px;margin:0 0 6px}.password-grid input{width:100%;padding:12px;border:1px solid #bfd5ed;border-radius:9px;font:inherit;color:#16406f}.password-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:15px}.password-status{font-size:13px;margin-top:10px;white-space:pre-wrap}.password-status.ok{color:#17764b}.password-status.err{color:#a52d2d}@media(max-width:600px){.panel{padding:17px}main{margin-top:16px}}</style><style id="kkp-notifications-css">
+.notify-wrap{position:relative;display:inline-flex;vertical-align:middle;margin-left:10px}
+.notify-bell{position:relative;background:#f2f7ff;color:#0d4d99;border:1px solid #c9dcf4;padding:9px 13px}
+.notify-bell:hover{background:#e7f1ff}
+.notify-count{position:absolute;top:-8px;right:-8px;background:#c52f43;color:white;border-radius:999px;padding:1px 6px;font-size:11px;min-width:20px;text-align:center}
+.notify-panel{position:absolute;right:0;top:calc(100% + 10px);width:min(370px,calc(100vw - 35px));max-height:440px;overflow:auto;background:#fff;border:1px solid #d6e4f4;border-radius:14px;box-shadow:0 18px 45px #15365d35;z-index:50;padding:12px}
+.notify-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:3px 3px 10px}
+.notify-heading strong{font-size:16px}.notify-heading button{font-size:12px;padding:6px 9px}
+.notify-item{display:block;width:100%;background:#fff;color:#174777;border:0;border-top:1px solid #e7edf5;text-align:left;padding:12px 7px;border-radius:0;font-size:13px;font-weight:400}
+.notify-item:hover{background:#edf5ff}.notify-item.unread{background:#f1f7ff;font-weight:700}
+.notify-item small{display:block;color:#607a99;font-size:11px;font-weight:400;margin-top:3px}
+.notify-empty{color:#607a99;font-size:13px;padding:15px 6px}
+.notify-toast{position:fixed;bottom:22px;right:22px;max-width:min(380px,calc(100vw - 40px));background:#113f79;color:white;padding:15px;border-radius:12px;box-shadow:0 12px 30px #0b306644;z-index:100;cursor:pointer}
+@media(max-width:600px){.notify-wrap{margin-left:5px}.notify-bell{padding:8px 11px}.notify-panel{right:-95px}}
+</style></head><body>
+<header><strong>KKP Lending · Manager Portal</strong><div><a href="index.html">Homepage</a> <span id="notifyWrap" class="notify-wrap hidden"><button id="notifyBell" class="notify-bell" type="button" aria-label="Application notifications" aria-expanded="false">🔔<span id="notifyCount" class="notify-count hidden">0</span></button><div id="notifyPanel" class="notify-panel hidden"><div class="notify-heading"><strong>Notifications</strong><button type="button" id="markAllRead" class="ghost">Mark all read</button></div><div id="notifyList"></div></div></span> <button id="logout" class="ghost hidden" type="button" style="margin-left:12px">Sign Out</button></div></header>
 <main><p id="message" role="status" aria-live="polite">Checking your manager access…</p>
 <section id="dashboard" class="hidden">
 <div class="panel"><h1 id="welcome">Manager Dashboard</h1><p>Manage your unique referral link and track applications assigned to you.</p><div class="small" id="username"></div></div>
@@ -20,15 +34,88 @@
 <div class="stats"><div class="stat"><b id="total">0</b><span>Total Applications</span></div><div class="stat"><b id="newCount">0</b><span>New</span></div><div class="stat"><b id="reviewCount">0</b><span>Under Review</span></div><div class="stat"><b id="approvedCount">0</b><span>Approved</span></div></div>
 <div class="panel"><h2>My Assigned Applications</h2><div class="toolbar"><input id="search" type="search" placeholder="Search reference, name, or location" aria-label="Search assigned applications" style="padding:11px;border:1px solid #bfd5ed;border-radius:9px;min-width:250px"><button id="refresh" type="button" class="ghost">Refresh</button></div><div class="scroll"><table><thead><tr><th>Reference</th><th>Submitted</th><th>Applicant</th><th>Email</th><th>Phone</th><th>Location</th><th>Status</th><th>Details</th></tr></thead><tbody id="rows"></tbody></table></div><p class="small">You may update the status of applications assigned to your account. Applicant information and assignment details remain controlled by KKP administrators.</p></div>
 <div id="applicationDetails" class="panel hidden"><div class="detail-top"><h2>Application Details</h2><button id="closeDetails" class="ghost" type="button">Close Details</button></div><p class="small" id="detailReference"></p><div class="detail-grid" id="detailGrid"></div><div class="detail-item"><strong>Questions or Additional Details</strong><div id="detailMessage" class="detail-message"></div></div></div>
-</section></main>
+</section></main><div id="notifyToast" class="notify-toast hidden" role="status" aria-live="polite"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script><script src="kkp-config.js"></script><script>
 'use strict';
 const cfg=window.KKP_SUPABASE||{};
 const el=id=>document.getElementById(id);
 const client=cfg.url&&cfg.anonKey&&window.supabase?window.supabase.createClient(cfg.url,cfg.anonKey):null;
 let applications=[];
+let managerUserId=null,notificationItems=[],readNotificationIds=new Set(),knownApplicationIds=new Set(),notificationsInitialized=false,checkingNotifications=false;
+let notifyTimer=null;
+function storageKey(kind){return 'kkp_manager_'+kind+'_'+managerUserId}
+function loadStoredIds(kind){
+ try{return new Set(JSON.parse(localStorage.getItem(storageKey(kind))||'[]'))}
+ catch(_){return new Set()}
+}
+function storeIds(kind,ids){
+ try{localStorage.setItem(storageKey(kind),JSON.stringify([...ids].slice(-500)))}catch(_){}
+}
+function syncNotificationUI(){
+ const unread=notificationItems.filter(x=>!readNotificationIds.has(x.id));
+ el('notifyCount').textContent=unread.length>99?'99+':String(unread.length);
+ el('notifyCount').classList.toggle('hidden',!unread.length);
+ const list=el('notifyList');list.replaceChildren();
+ if(!notificationItems.length){const p=document.createElement('div');p.className='notify-empty';p.textContent='No new application notifications yet.';list.append(p);return}
+ for(const item of notificationItems.slice(0,35)){
+  const b=document.createElement('button');b.type='button';b.className='notify-item'+(readNotificationIds.has(item.id)?'':' unread');
+  b.textContent='New application: '+(item.applicant_name||'Applicant');
+  const small=document.createElement('small');
+  small.textContent=(item.reference_number||'No reference')+' · '+new Date(item.created_at).toLocaleString();
+  b.append(small);
+  b.addEventListener('click',()=>{
+   readNotificationIds.add(item.id);storeIds('read',readNotificationIds);syncNotificationUI();
+   el('notifyPanel').classList.add('hidden');el('notifyBell').setAttribute('aria-expanded','false');
+   const r=applications.find(a=>a.id===item.id);
+   if(r)showDetails(r);else message('Application not in the current list. Press Refresh.');
+  });
+  list.append(b);
+ }
+}
+function updateNotifications(rows,announce){
+ if(!managerUserId)return;
+ if(!notificationsInitialized){
+  initializeNotifications();
+  if(localStorage.getItem(storageKey('known'))===null){
+   knownApplicationIds=new Set(rows.map(r=>r.id));
+   storeIds('known',knownApplicationIds);
+  }
+ }
+ const newcomers=rows.filter(r=>!knownApplicationIds.has(r.id));
+ for(const r of newcomers){knownApplicationIds.add(r.id);notificationIds.add(r.id)}
+ storeIds('known',knownApplicationIds);
+ storeIds('alerts',notificationIds);
+ notificationItems=rows.filter(r=>notificationIds.has(r.id));
+ syncNotificationUI();
+ if(announce&&newcomers.length){
+  el('notifyToast').textContent=newcomers.length===1?'🔔 New franchise application received!':'🔔 '+newcomers.length+' new franchise applications received!';
+  el('notifyToast').classList.remove('hidden');
+ }
+}
+let notificationIds=new Set();
+function initializeNotifications(){
+ knownApplicationIds=loadStoredIds('known');
+ readNotificationIds=loadStoredIds('read');
+ notificationIds=loadStoredIds('alerts');
+ notificationsInitialized=true;
+}
+async function pollNotifications(){
+ if(checkingNotifications||!managerUserId||document.hidden)return;
+ checkingNotifications=true;
+ try{
+  const {data,error}=await client.from('franchise_applications')
+   .select('id,reference_number,created_at,applicant_name,email,phone,preferred_location,package_type,message,status')
+   .order('created_at',{ascending:false}).limit(500);
+  if(!error&&data){
+   const previous=applications;
+   applications=data;render();
+   updateNotifications(data,true);
+  }
+ }finally{checkingNotifications=false}
+}
+
 function message(text,ok=false){el('message').textContent=text;el('message').classList.toggle('ok',ok)}
-function hide(){el('dashboard').classList.add('hidden');el('logout').classList.add('hidden');el('applicationDetails').classList.add('hidden')}
+function hide(){el('dashboard').classList.add('hidden');el('logout').classList.add('hidden');el('applicationDetails').classList.add('hidden');el('notifyWrap').classList.add('hidden');if(notifyTimer){clearInterval(notifyTimer);notifyTimer=null}managerUserId=null;notificationsInitialized=false}
 function redirect(){hide();message('Manager sign-in required. Redirecting to login…');location.replace('manager-login.html')}
 async function checkAccess(){
  if(!client){message('Supabase configuration missing. Please contact KKP support.');return false}
@@ -41,14 +128,16 @@ async function checkAccess(){
  el('welcome').textContent='Welcome, '+profile.full_name;
  el('username').textContent='Username: '+(profile.username||'—');
  el('referralLink').value='https://kkpfranchise.com/?ref='+encodeURIComponent(profile.referral_code);
- el('dashboard').classList.remove('hidden');el('logout').classList.remove('hidden');message('');
+ if(managerUserId!==user.id){managerUserId=user.id;notificationsInitialized=false}
+  el('dashboard').classList.remove('hidden');el('logout').classList.remove('hidden');el('notifyWrap').classList.remove('hidden');message('');
  return true;
 }
 async function load(){
  if(!await checkAccess())return;
  const {data,error}=await client.from('franchise_applications').select('id,reference_number,created_at,applicant_name,email,phone,preferred_location,package_type,message,status').order('created_at',{ascending:false}).limit(500);
  if(error){message('Unable to load assigned applications. Check your manager permissions.');return}
- applications=data||[];render();
+ applications=data||[];render();updateNotifications(applications,false);
+  if(!notifyTimer)notifyTimer=setInterval(pollNotifications,30000);
 }
 function render(){
  const q=el('search').value.trim().toLowerCase();const filtered=applications.filter(r=>[r.reference_number,r.applicant_name,r.email,r.preferred_location].some(v=>String(v||'').toLowerCase().includes(q)));
@@ -150,6 +239,21 @@ el('changePasswordForm').addEventListener('submit',async event=>{
  }
 });
 
+el('notifyBell').addEventListener('click',()=>{
+ const opening=el('notifyPanel').classList.contains('hidden');
+ el('notifyPanel').classList.toggle('hidden',!opening);
+ el('notifyBell').setAttribute('aria-expanded',String(opening));
+});
+el('markAllRead').addEventListener('click',()=>{
+ for(const item of notificationItems)readNotificationIds.add(item.id);
+ storeIds('read',readNotificationIds);syncNotificationUI();
+});
+el('notifyToast').addEventListener('click',()=>{
+ el('notifyToast').classList.add('hidden');
+ el('notifyPanel').classList.remove('hidden');
+ el('notifyBell').setAttribute('aria-expanded','true');
+});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&managerUserId)pollNotifications()});
 el('search').addEventListener('input',render);
 el('refresh').addEventListener('click',load);
 el('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(el('referralLink').value);message('Referral link copied.',true)}catch(_){el('referralLink').select();message('Select and copy your referral link.')}});
