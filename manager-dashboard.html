@@ -235,7 +235,7 @@ function render(){
 
 function openApplication(id){
  const url='manager-applications.html'+(id?'?id='+encodeURIComponent(id):'');
- window.open(url,'kkp_manager_applications');
+ window.location.assign(url);
 }
 document.querySelectorAll('[data-open-applications="true"]').forEach(b=>{
  b.addEventListener('click',event=>{event.preventDefault();event.stopImmediatePropagation();openApplication('')},true);
