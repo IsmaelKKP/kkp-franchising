@@ -24,28 +24,85 @@ const message=document.getElementById('message');
 const button=document.getElementById('signIn');
 function notify(text,ok=false){message.textContent=text;message.className='msg'+(ok?' ok':'');message.style.display='block'}
 const client=config.url&&config.anonKey&&window.supabase?window.supabase.createClient(config.url,config.anonKey):null;
+
 document.getElementById('loginForm').addEventListener('submit',async event=>{
- event.preventDefault();message.style.display='none';
- if(!client){notify('Login configuration is missing. Contact KKP support.');return}
+ event.preventDefault();
+ message.style.display='none';
+
+ if(!client){
+  notify('Login configuration is missing. Contact KKP support.');
+  return;
+ }
+
  const username=document.getElementById('username').value.trim().toLowerCase();
  const password=document.getElementById('password').value;
- if(!/^[a-z][a-z0-9_]{3,19}$/.test(username)||!password){notify('Enter a valid username and password.');return}
- button.disabled=true;button.textContent='Signing in…';
+
+ if(!/^[a-z][a-z0-9_]{3,19}$/.test(username)||!password){
+  notify('Enter a valid username and password.');
+  return;
+ }
+
+ button.disabled=true;
+ button.textContent='Signing in…';
+
  try{
-  const response=await fetch('/api/manager-login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,password})});
-  const result=await response.json();
-  if(!response.ok||!result.access_token||!result.refresh_token){notify('Unable to sign in. Check your credentials or manager approval status.');return}
-  const {error}=await client.auth.setSession({access_token:result.access_token,refresh_token:result.refresh_token});
-  if(error){notify('Could not establish your session. Please try again.');return}
-  const {data:{user}}=await client.auth.getUser();
-  const {data:profile,error:profileError}=await client.from('kkp_manager_profiles').select('role,approval_status').eq('user_id',user?.id||'').maybeSingle();
-  if(profileError||profile?.role!=='manager'||profile?.approval_status!=='approved'){
-   await client.auth.signOut();notify('Your manager account is not approved for access.');return;
+  const response=await fetch('/api/manager-login',{
+   method:'POST',
+   headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({username,password})
+  });
+
+  let result={};
+  try{result=await response.json()}catch(_){}
+
+  if(!response.ok||!result.access_token||!result.refresh_token){
+   notify('Unable to sign in. Check your credentials or manager approval status.');
+   return;
   }
+
+  const {error:sessionError}=await client.auth.setSession({
+   access_token:result.access_token,
+   refresh_token:result.refresh_token
+  });
+
+  if(sessionError){
+   notify('Could not establish your session. Please try again.');
+   return;
+  }
+
+  const {data:userData,error:userError}=await client.auth.getUser();
+  const user=userData?.user;
+
+  if(userError||!user){
+   await client.auth.signOut();
+   notify('Could not verify your login session. Please try again.');
+   return;
+  }
+
+  const {data:profile,error:profileError}=await client
+   .from('kkp_manager_profiles')
+   .select('role,approval_status')
+   .eq('user_id',user.id)
+   .maybeSingle();
+
+  if(profileError||profile?.role!=='manager'||profile?.approval_status!=='approved'){
+   await client.auth.signOut();
+   notify('Your manager account is not approved for access.');
+   return;
+  }
+
   document.getElementById('password').value='';
-  notify('Login successful. Your manager dashboard is being prepared.',true);
-  // Redirect will be enabled after the private dashboard is deployed and tested.
- }catch(error){notify('Login service unavailable. Please try again later.')}finally{button.disabled=false;button.textContent='Sign In'}
+  notify('Login successful. Redirecting to your dashboard…',true);
+
+  // Send the authenticated, approved manager to their private dashboard.
+  window.location.replace('manager-dashboard.html');
+
+ }catch(error){
+  notify('Login service unavailable. Please try again later.');
+ }finally{
+  button.disabled=false;
+  button.textContent='Sign In';
+ }
 });
 </script>
 </body>
