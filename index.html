@@ -869,6 +869,21 @@ body.kkp-high-contrast .card,body.kkp-high-contrast .kkp-mini,body.kkp-high-cont
 body.kkp-high-contrast a:not(.btn){text-decoration:underline;text-underline-offset:3px}
 body.kkp-high-contrast :focus-visible{outline:3px solid #f59e0b!important;outline-offset:3px!important}
 @media(max-width:620px){#kkp-accessibility-widget{right:12px;bottom:78px}#kkp-accessibility-toggle{padding:9px 12px;font-size:13px}#kkp-accessibility-panel{max-height:65vh;overflow:auto}}
+/* Keep accessibility controls separate from the right-side Messenger/office panel. */
+#kkp-accessibility-widget{left:16px!important;right:auto!important;bottom:18px!important;z-index:10000}
+#kkp-accessibility-toggle{margin-left:0!important;max-width:calc(100vw - 32px)}
+#kkp-accessibility-panel{max-width:calc(100vw - 32px);max-height:min(70vh,520px);overflow-y:auto}
+@media(max-width:620px){
+  #kkp-accessibility-widget{left:10px!important;right:auto!important;bottom:12px!important}
+  #kkp-accessibility-toggle{font-size:0!important;width:48px;height:48px;min-width:48px;padding:0!important;gap:0}
+  #kkp-accessibility-toggle{color:transparent!important;position:relative}
+  #kkp-accessibility-toggle::after{content:"♿";font-size:23px;color:#fff;position:absolute;inset:0;display:grid;place-items:center}
+  #kkp-accessibility-panel{width:min(310px,calc(100vw - 24px));max-height:65vh}
+}
+/* Compact circular accessibility launcher on desktop and mobile. */
+#kkp-accessibility-toggle{width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important;max-width:48px!important;padding:0!important;border-radius:50%!important;font-size:23px!important;line-height:1!important;gap:0!important;color:#fff!important;position:relative}
+#kkp-accessibility-toggle::after{content:none!important;display:none!important}
+@media(max-width:620px){#kkp-accessibility-toggle{width:46px!important;height:46px!important;min-width:46px!important;min-height:46px!important;max-width:46px!important;font-size:22px!important}}
 @media print{#kkp-accessibility-widget{display:none!important}}
 </style>
 <div id="kkp-accessibility-widget">
@@ -884,7 +899,7 @@ body.kkp-high-contrast :focus-visible{outline:3px solid #f59e0b!important;outlin
     <label class="kkp-a11y-check"><input id="kkp-a11y-contrast" type="checkbox"> High contrast mode</label>
     <button id="kkp-a11y-reset" type="button">Reset settings</button>
   </div>
-  <button id="kkp-accessibility-toggle" type="button" aria-label="Open accessibility settings" aria-controls="kkp-accessibility-panel" aria-expanded="false">♿ Accessibility</button>
+  <button id="kkp-accessibility-toggle" type="button" aria-label="Open accessibility settings" aria-controls="kkp-accessibility-panel" aria-expanded="false">♿</button>
 </div>
 <script>
 (function(){
