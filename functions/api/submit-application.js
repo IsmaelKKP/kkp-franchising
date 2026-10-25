@@ -23,13 +23,11 @@ export async function onRequestPost({ request, env }) {
       phone,
       location,
       message,
-      turnstileToken
+      turnstileToken,
+      referralCode
     } = body;
 
-    if (
-      !name || !email || !phone ||
-      !location || !turnstileToken
-    ) {
+    if (!name || !email || !phone || !location || !turnstileToken) {
       return reply(400, { error: "Missing required fields." });
     }
 
@@ -44,14 +42,19 @@ export async function onRequestPost({ request, env }) {
       email.length > 254 ||
       phone.length > 40 ||
       location.length > 180 ||
-      message.length > 3000
+      message.length > 3000 ||
+      (referralCode != null &&
+        (typeof referralCode !== "string" ||
+          !/^KKP-[A-F0-9]{16}$/.test(referralCode)))
     ) {
       return reply(400, { error: "Invalid application fields." });
     }
 
-    if (!env.TURNSTILE_SECRET_KEY ||
-        !env.SUPABASE_URL ||
-        !env.SUPABASE_SERVICE_ROLE_KEY) {
+    if (
+      !env.TURNSTILE_SECRET_KEY ||
+      !env.SUPABASE_URL ||
+      !env.SUPABASE_SERVICE_ROLE_KEY
+    ) {
       return reply(503, { error: "Service not configured." });
     }
 
@@ -68,69 +71,89 @@ export async function onRequestPost({ request, env }) {
       return reply(503, { error: "Verification unavailable." });
     }
 
-    const result = await verification.json();
+    const verificationResult = await verification.json();
 
     if (
-      !result.success ||
-      result.hostname !== "kkpfranchise.com"
+      !verificationResult.success ||
+      verificationResult.hostname !== "kkpfranchise.com"
     ) {
       return reply(403, { error: "Security verification failed." });
     }
 
+    const hasReferral = referralCode != null && referralCode !== "";
+
+    const rpcName = hasReferral
+      ? "submit_franchise_manager_application"
+      : "submit_franchise_application";
+
+    const rpcBody = {
+      p_applicant_name: name,
+      p_email: email,
+      p_phone: phone,
+      p_preferred_location: location,
+      p_message: message
+    };
+
+    if (hasReferral) {
+      rpcBody.p_referral_code = referralCode;
+    }
+
+    const supabaseUrl = env.SUPABASE_URL.replace(/\/$/, "");
+
+    const authHeaders = {
+      "Content-Type": "application/json",
+      apikey: env.SUPABASE_SERVICE_ROLE_KEY,
+      Authorization: `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}`
+    };
+
     const supabaseResponse = await fetch(
-      `${env.SUPABASE_URL.replace(/\/$/, "")}/rest/v1/rpc/submit_franchise_application`,
+      `${supabaseUrl}/rest/v1/rpc/${rpcName}`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          apikey: env.SUPABASE_SERVICE_ROLE_KEY,
-          Authorization: `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}`
-        },
-        body: JSON.stringify({
-          p_applicant_name: name,
-          p_email: email,
-          p_phone: phone,
-          p_preferred_location: location,
-          p_message: message
-        })
+        headers: authHeaders,
+        body: JSON.stringify(rpcBody)
       }
     );
 
     if (!supabaseResponse.ok) {
       return reply(400, {
-        error: "Unable to submit application. Please check your details or try again later."
+        error: hasReferral
+          ? "Unable to submit application. Please check your referral link and application details."
+          : "Unable to submit application. Please check your details or try again later."
       });
     }
 
-   const applicationId = await supabaseResponse.json();
+    const applicationId = await supabaseResponse.json();
 
-const referenceResponse = await fetch(
-  `${env.SUPABASE_URL.replace(/\/$/, "")}/rest/v1/rpc/get_franchise_reference`,
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      apikey: env.SUPABASE_SERVICE_ROLE_KEY,
-      Authorization: `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}`
-    },
-    body: JSON.stringify({
-      p_application_id: applicationId
-    })
-  }
-);
+    let referenceNumber = null;
 
-let referenceNumber = null;
+    try {
+      const referenceResponse = await fetch(
+        `${supabaseUrl}/rest/v1/rpc/get_franchise_reference`,
+        {
+          method: "POST",
+          headers: authHeaders,
+          body: JSON.stringify({
+            p_application_id: applicationId
+          })
+        }
+      );
 
-if (referenceResponse.ok) {
-  referenceNumber = await referenceResponse.json();
-}
+      if (referenceResponse.ok) {
+        referenceNumber = await referenceResponse.json();
+      }
+    } catch {
+      // Application was already saved.
+      // Do not treat reference lookup failure as submission failure.
+    }
 
-return reply(200, {
-  success: true,
-  applicationId,
-  referenceNumber,
-  message: "Application submitted successfully."
-});
+    return reply(200, {
+      success: true,
+      applicationId,
+      referenceNumber,
+      applicationType: hasReferral ? "manager_referral" : "direct",
+      message: "Application submitted successfully."
+    });
 
   } catch {
     return reply(500, {
