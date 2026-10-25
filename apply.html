@@ -34,12 +34,12 @@ footer{text-align:center;color:#69809a;padding:20px;font-size:12px}
 <div class="actions"><a class="btn secondary" href="calculator.html" target="_blank" rel="noopener">View Feasibility Calculator ↗</a><a class="btn secondary" href="index.html">← Return Home</a></div></div>
 <div class="card"><h2 style="margin:0 0 7px;color:#103b75">Applicant Information</h2>
 <p style="margin:0 0 25px;color:#657d97;font-size:14px">Standard Package: ₱3,000,000 all-inclusive. Fields marked * are required.</p>
-<form id="inquiry"><div class="calc-grid"><div class="field"><label for="name">Full name *</label><input autocomplete="name" id="name" name="name" required></div><div class="field"><label for="email">Email address *</label><input autocomplete="email" id="email" name="email" required type="email"></div><div class="field"><label for="phone">Contact number *</label><input autocomplete="tel" id="phone" name="phone" required></div><div class="field"><label for="program">Opportunity *</label><input id="program" name="program" value="License Sharing" readonly aria-readonly="true"></div><div class="field"><label for="package">Preferred package</label><select id="package" name="package"><option value="">To be discussed</option><option>Standard Package — ₱3,000,000 all-inclusive</option></select></div><div class="field"><label for="place">Preferred location *</label><input id="place" name="location" placeholder="City, Province" required></div><div class="field"><label for="followup_date">Preferred follow-up date *</label><input id="followup_date" name="followup_date" type="date" required></div><div class="field"><label for="followup_time">Preferred follow-up time *</label><input id="followup_time" name="followup_time" type="time" required></div></div><p class="small" style="margin:10px 0 0">Follow-up schedule is in Philippine Time (PHT, UTC+8), subject to confirmation by KKP.</p><div class="field" style="margin-top:18px"><label for="message">Questions or additional details</label><textarea id="message" name="message" placeholder="Tell us about your business plans..." rows="4"></textarea></div><label style="display:flex;gap:10px;margin:18px 0;font-size:13px;color:#556780"><input required style="width:auto" type="checkbox"> I consent to being contacted regarding this inquiry and understand my information will be used for application follow-up.</label><button class="btn" id="send" type="submit">Submit License Sharing Inquiry →</button><p class="small" id="formStatus">Your application will be submitted securely to KKP.</p><div class="success" id="success" role="status"></div></form></div>
+<form id="inquiry"><div class="calc-grid"><div class="field"><label for="name">Full name *</label><input autocomplete="name" id="name" name="name" required></div><div class="field"><label for="email">Email address *</label><input autocomplete="email" id="email" name="email" required type="email"></div><div class="field"><label for="phone">Contact number *</label><input autocomplete="tel" id="phone" name="phone" required></div><div class="field"><label for="program">Opportunity *</label><input id="program" name="program" value="License Sharing" readonly aria-readonly="true"></div><div class="field"><label for="package">Preferred package</label><select id="package" name="package"><option value="">To be discussed</option><option>Standard Package — ₱3,000,000 all-inclusive</option></select></div><div class="field"><label for="place">Preferred location *</label><input id="place" name="location" placeholder="City, Province" required></div><div class="field"><label for="followup_date">Preferred follow-up date *</label><input id="followup_date" name="followup_date" type="date" required></div><div class="field"><label for="followup_time">Preferred follow-up time *</label><input id="followup_time" name="followup_time" type="time" required></div></div><p class="small" style="margin:10px 0 0">Follow-up schedule is in Philippine Time (PHT, UTC+8), subject to confirmation by KKP.</p><div class="field" style="margin-top:18px"><label for="message">Questions or additional details</label><textarea id="message" name="message" placeholder="Tell us about your business plans..." rows="4"></textarea></div><label style="display:flex;gap:10px;margin:18px 0;font-size:13px;color:#556780"><input required style="width:auto" type="checkbox"> I consent to being contacted regarding this inquiry and understand my information will be used for application follow-up.</label>
+<div style="margin:16px 0"><div class="cf-turnstile" data-sitekey="0x4AAAAAAFk_dNF2jzSD6wRO" data-theme="light"></div></div>
+<button class="btn" id="send" type="submit">Submit License Sharing Inquiry →</button><p class="small" id="formStatus" role="status">Your application will be submitted securely to KKP.</p><div class="success" id="success" role="status"></div></form></div>
 </main><footer>© 2026 KKP Lending Corp. · Application inquiries are subject to review and approval.</footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="kkp-config.js"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
-// Date input uses the Philippines' calendar date to prevent past requests.
 const followupDateInput=document.getElementById('followup_date');
 function updateMinimumFollowupDate(){
  const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Manila',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
@@ -47,37 +47,45 @@ function updateMinimumFollowupDate(){
 }
 updateMinimumFollowupDate();
 document.getElementById('inquiry').addEventListener('submit', async function(e){
-e.preventDefault();
-const config=window.KKP_SUPABASE || {};
-const status=document.getElementById('formStatus');
-if(!config.url || !config.anonKey || config.anonKey.startsWith('PASTE_')){
- status.textContent='Application submission is not configured yet. Please contact KKP.';
- return;
-}
-const button=document.getElementById('send');button.disabled=true;button.textContent='Submitting...';
-try{
- const form = new FormData(this);
+ e.preventDefault();
+ const status=document.getElementById('formStatus');
+ const success=document.getElementById('success');
+ success.style.display='none';
  updateMinimumFollowupDate();
- if(!this.reportValidity()){button.disabled=false;button.textContent='Submit License Sharing Inquiry →';return;}
+ if(!this.reportValidity())return;
+ const form=new FormData(this);
  const date=String(form.get('followup_date')||'');
  const time=String(form.get('followup_time')||'');
  const note=String(form.get('message')||'').trim();
- // Keep the existing 5-argument Supabase RPC intact; store scheduling details in its message field.
- const applicationDetails=`Opportunity: License Sharing\nPreferred follow-up date: ${date}\nPreferred follow-up time: ${time} PHT (UTC+8)\n${note ? 'Additional details: '+note : ''}`;
- if(applicationDetails.length>3000){throw new Error('Message too long');}
- const client=window.supabase.createClient(config.url,config.anonKey);
- const {error}=await client.rpc('submit_franchise_application', {
-  p_applicant_name:String(form.get('name')||'').trim(),
-  p_email:String(form.get('email')||'').trim(),
-  p_phone:String(form.get('phone')||'').trim(),
-  p_preferred_location:String(form.get('location')||'').trim(),
-  p_message:applicationDetails
- });
- if(error)throw error;
- this.reset();document.getElementById('success').style.display='block';
- document.getElementById('success').textContent='Your License Sharing inquiry was submitted successfully.';
- status.textContent='Submission complete.';
-}catch(err){status.textContent='Unable to submit your application. Please try again later.'}
-finally{button.disabled=false;button.textContent='Submit License Sharing Inquiry →'}
+ const message=`Opportunity: License Sharing\nPreferred follow-up date: ${date}\nPreferred follow-up time: ${time} PHT (UTC+8)\n${note ? 'Additional details: '+note : ''}`;
+ if(message.length>3000){status.textContent='Additional details are too long. Please shorten your message.';return;}
+ const token=String(form.get('cf-turnstile-response')||'');
+ if(!token){status.textContent='Please complete the security verification before submitting.';return;}
+ const button=document.getElementById('send');
+ button.disabled=true;button.textContent='Submitting...';
+ status.textContent='Submitting your application securely...';
+ try{
+  const response=await fetch('/api/submit-application',{
+   method:'POST',headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({
+    name:String(form.get('name')||'').trim(),
+    email:String(form.get('email')||'').trim(),
+    phone:String(form.get('phone')||'').trim(),
+    location:String(form.get('location')||'').trim(),
+    message,turnstileToken:token
+   })
+  });
+  const result=await response.json().catch(()=>({}));
+  if(!response.ok)throw new Error(result.error||'Unable to submit your application. Please try again later.');
+  this.reset();
+  success.style.display='block';
+  success.textContent='Your License Sharing inquiry was submitted successfully.';
+  status.textContent='Submission complete.';
+ }catch(err){
+  status.textContent=err.message||'Unable to submit your application. Please try again later.';
+ }finally{
+  button.disabled=false;button.textContent='Submit License Sharing Inquiry →';
+  if(window.turnstile){try{window.turnstile.reset();}catch(_){}}
+ }
 });
 </script></body></html>
