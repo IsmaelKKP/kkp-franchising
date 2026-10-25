@@ -194,7 +194,6 @@ function buildFeasibilityReport(){
     }
   }
   section('6. Monthly and annual operating expense totals');stats('#expenseTotals .metric');
-  const caveat=document.createElement('p');caveat.className='report-small';caveat.textContent='Projection only, not guaranteed returns. Principal collections are not profit. Annual net income deducts modeled operating expenses, provisions and co-funder payments from collected interest; taxes and unmodeled losses are excluded. Daily collections are reinvested and operating costs are funded separately.';report.appendChild(caveat);
   return report;
 }
 function printFeasibility(){
