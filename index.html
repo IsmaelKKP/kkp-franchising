@@ -756,7 +756,122 @@ section.section#calculator .head h2{color:#ffffff!important;opacity:1!important;
 section.section#calculator .head p{color:#e6efff!important;opacity:1!important}
 section.section#calculator .kkp-center .btn{color:#ffffff!important;background:#1761bf!important;border-color:#4388db!important}
 section.section#calculator .kkp-center .btn:hover{background:#2475d7!important}
-</style></head><body><div class="top"><div class="wrap">KATUWANG AT KAAGAPAY SA PAG-UNLAD   •   BUSINESS PARTNERSHIP OPPORTUNITIES</div></div><header class="nav"><div class="wrap nav-inner"><a class="brand" href="#home"><img alt="KKP Holdings logo" class="holdings-logo" src="kkp-new-logo.png"/><span>Katuwang Kaagapay sa Pag-unlad Lending Corp.<small>FRANCHISING &amp; BUSINESS PARTNERSHIPS</small></span></a><div class="kkp-nav-actions"><a class="kkp-nav-apply btn" href="apply.html">Apply Now →</a><button aria-controls="links" aria-expanded="false" aria-label="Open website menu" class="menu" id="menu" type="button">☰ <span>Menu</span></button></div><nav class="links" id="links"><a href="#about">About</a><a href="#lending-programs">Lending</a><a href="#opportunities">Franchise</a><a href="operational-setup.html#franchise-detail">Package</a><a href="operational-setup.html" rel="noopener noreferrer" target="_blank">Operations ↗</a><a href="calculator.html" rel="noopener" target="_blank">Feasibility ↗</a><a href="#expansion">Branches</a><a href="#businesses">KKP Group</a><a href="#foundation">Foundation</a><a href="#legal-compliances">Compliance</a><a href="operational-setup.html#process">Partner Journey</a><a href="#faq">FAQ</a><a aria-label="Manager sign in" class="kkp-admin-nav kkp-manager-nav" href="manager-login.html">👤 Manager Sign In</a><a aria-label="Administrator sign in" class="kkp-admin-nav" href="admin.html">🔒 Admin Sign In</a></nav></div></header>
+</style>
+<style id="kkp-polished-navigation-menu">
+/* Polished dropdown navigation: cleaner spacing, clearer grouping, and stronger tap targets */
+@media (max-width:1550px) {
+  .nav .links {
+    gap: 4px !important;
+    padding: 14px !important;
+    background: #fff !important;
+    border: 1px solid #d9e6f7 !important;
+    border-radius: 0 0 18px 18px !important;
+    box-shadow: 0 22px 48px rgba(10, 48, 100, .20) !important;
+  }
+  .nav .links a {
+    display: flex !important;
+    align-items: center !important;
+    min-height: 44px !important;
+    padding: 11px 14px !important;
+    margin: 1px 0 !important;
+    border-radius: 10px !important;
+    color: #123e78 !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    line-height: 1.35 !important;
+    text-decoration: none !important;
+    transition: background .16s ease, color .16s ease, transform .16s ease !important;
+  }
+  .nav .links a:hover,
+  .nav .links a:focus-visible {
+    background: #edf5ff !important;
+    color: #075fc5 !important;
+    text-decoration: none !important;
+    outline: none !important;
+  }
+  .nav .links a:active { transform: scale(.99) !important; }
+  .nav .links a.kkp-manager-nav,
+  .nav .links a.kkp-admin-nav {
+    justify-content: center !important;
+    text-align: center !important;
+    margin-top: 7px !important;
+    border: 1px solid #d5e5fa !important;
+    background: #f5f9ff !important;
+    color: #0b58b5 !important;
+    font-weight: 800 !important;
+  }
+  .nav .links a.kkp-manager-nav:hover,
+  .nav .links a.kkp-admin-nav:hover {
+    background: #e7f1ff !important;
+  }
+  .nav .links a.btn,
+  .nav .links a.btn.blue {
+    justify-content: center !important;
+    margin-top: 8px !important;
+    min-height: 46px !important;
+    border: 0 !important;
+    border-radius: 11px !important;
+    background: linear-gradient(135deg,#0868d8,#0755b4) !important;
+    color: #fff !important;
+    box-shadow: 0 6px 14px rgba(8, 92, 190, .18) !important;
+  }
+  .nav .links a.btn:hover,
+  .nav .links a.btn.blue:hover {
+    background: #064a9c !important;
+    color: #fff !important;
+  }
+}
+@media (max-width:620px) {
+  .nav .links {
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: min(72vh, 560px) !important;
+    padding: 12px !important;
+    border-radius: 0 0 16px 16px !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important;
+  }
+  .nav .links a {
+    min-height: 46px !important;
+    padding: 12px 14px !important;
+    font-size: 14px !important;
+  }
+  .nav .menu {
+    border-radius: 10px !important;
+    padding: 10px 13px !important;
+    background: #f4f8ff !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    box-shadow: 0 2px 7px rgba(10, 53, 113, .07) !important;
+  }
+}
+</style>
+
+
+<style id="kkp-menu-viewport-fix">
+/* Keep the dropdown below the header and scroll its own content. */
+@media (max-width:1550px) {
+  .nav .links {
+    position: fixed !important;
+    top: 76px !important;
+    bottom: auto !important;
+    max-height: calc(100dvh - 88px) !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important;
+    scrollbar-width: thin;
+    z-index: 99999 !important;
+  }
+}
+@media (max-width:620px) {
+  .nav .links {
+    top: 76px !important;
+    max-height: calc(100dvh - 88px) !important;
+  }
+}
+</style>
+</head><body><div class="top"><div class="wrap">KATUWANG AT KAAGAPAY SA PAG-UNLAD   •   BUSINESS PARTNERSHIP OPPORTUNITIES</div></div><header class="nav"><div class="wrap nav-inner"><a class="brand" href="#home"><img alt="KKP Holdings logo" class="holdings-logo" src="kkp-new-logo.png"/><span>Katuwang Kaagapay sa Pag-unlad Lending Corp.<small>FRANCHISING &amp; BUSINESS PARTNERSHIPS</small></span></a><div class="kkp-nav-actions"><a class="kkp-nav-apply btn" href="apply.html">Apply Now →</a><button aria-controls="links" aria-expanded="false" aria-label="Open website menu" class="menu" id="menu" type="button">☰ <span>Menu</span></button></div><nav class="links" id="links"><a href="#about">About</a><a href="#lending-programs">Lending</a><a href="#opportunities">Franchise</a><a href="operational-setup.html#franchise-detail">Package</a><a href="operational-setup.html" rel="noopener noreferrer" target="_blank">Operations ↗</a><a href="calculator.html" rel="noopener" target="_blank">Feasibility ↗</a><a href="#expansion">Branches</a><a href="#businesses">KKP Group</a><a href="#foundation">Foundation</a><a href="#legal-compliances">Compliance</a><a href="operational-setup.html#process">Partner Journey</a><a href="#faq">FAQ</a><a aria-label="Manager sign in" class="kkp-admin-nav kkp-manager-nav" href="manager-login.html">👤 Manager Sign In</a><a aria-label="Administrator sign in" class="kkp-admin-nav" href="admin.html">🔒 Admin Sign In</a></nav></div></header>
 <main><section class="hero corporate-hero kkp-approved-hero" id="home">
 <div aria-hidden="true" class="kkp-hero-backdrop"></div>
 <div class="wrap kkp-hero-inner">
