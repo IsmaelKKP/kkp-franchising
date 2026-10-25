@@ -102,10 +102,35 @@ export async function onRequestPost({ request, env }) {
       });
     }
 
-    return reply(200, {
-      success: true,
-      message: "Application submitted successfully."
-    });
+   const applicationId = await supabaseResponse.json();
+
+const referenceResponse = await fetch(
+  `${env.SUPABASE_URL.replace(/\/$/, "")}/rest/v1/rpc/get_franchise_reference`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: env.SUPABASE_SERVICE_ROLE_KEY,
+      Authorization: `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}`
+    },
+    body: JSON.stringify({
+      p_application_id: applicationId
+    })
+  }
+);
+
+let referenceNumber = null;
+
+if (referenceResponse.ok) {
+  referenceNumber = await referenceResponse.json();
+}
+
+return reply(200, {
+  success: true,
+  applicationId,
+  referenceNumber,
+  message: "Application submitted successfully."
+});
 
   } catch {
     return reply(500, {
