@@ -33,21 +33,31 @@ footer{text-align:center;color:#69809a;padding:20px;font-size:12px}
 <div class="actions"><a class="btn secondary" href="calculator.html" target="_blank" rel="noopener">View Feasibility Calculator ↗</a><a class="btn secondary" href="index.html">← Return Home</a></div></div>
 <div class="card"><h2 style="margin:0 0 7px;color:#103b75">Applicant Information</h2>
 <p style="margin:0 0 25px;color:#657d97;font-size:14px">Standard Franchise Package: ₱3,000,000 all-inclusive. Fields marked * are required.</p>
-<form id="inquiry"><div class="calc-grid"><div class="field"><label for="name">Full name *</label><input autocomplete="name" id="name" name="name" required=""/></div><div class="field"><label for="email">Email address *</label><input autocomplete="email" id="email" name="email" required="" type="email"/></div><div class="field"><label for="phone">Contact number *</label><input autocomplete="tel" id="phone" name="phone" required=""/></div><div class="field"><label for="program">Opportunity *</label><select id="program" name="program" required=""><option value="">Select opportunity</option><option>Lending Branch Franchising</option><option>License Sharing</option></select></div><div class="field"><label for="package">Preferred package</label><select id="package" name="package"><option value="">To be discussed</option><option>Standard Package — ₱3,000,000 all-inclusive</option></select></div><div class="field"><label for="place">Preferred location *</label><input id="place" name="location" placeholder="City, Province" required=""/></div></div><div class="field" style="margin-top:18px"><label for="message">Questions or additional details</label><textarea id="message" name="message" placeholder="Tell us about your business plans..." rows="4"></textarea></div><label style="display:flex;gap:10px;margin:18px 0;font-size:13px;color:#556780"><input required="" style="width:auto" type="checkbox"/> I consent to being contacted regarding this inquiry and understand my information will be used for application follow-up.</label><button class="btn" id="send" type="submit">Submit Franchise Inquiry →</button><p class="small" id="formStatus">Complete the form below. Submission requires KKP to configure its application-receiving service.</p><div class="success" id="success" role="status"></div></form></div>
+<form id="inquiry"><div class="calc-grid"><div class="field"><label for="name">Full name *</label><input autocomplete="name" id="name" name="name" required=""/></div><div class="field"><label for="email">Email address *</label><input autocomplete="email" id="email" name="email" required="" type="email"/></div><div class="field"><label for="phone">Contact number *</label><input autocomplete="tel" id="phone" name="phone" required=""/></div><div class="field"><label for="program">Opportunity *</label><select id="program" name="program" required=""><option value="">Select opportunity</option><option>Lending Branch Franchising</option><option>License Sharing</option></select></div><div class="field"><label for="package">Preferred package</label><select id="package" name="package"><option value="">To be discussed</option><option>Standard Package — ₱3,000,000 all-inclusive</option></select></div><div class="field"><label for="place">Preferred location *</label><input id="place" name="location" placeholder="City, Province" required=""/></div></div><div class="field" style="margin-top:18px"><label for="message">Questions or additional details</label><textarea id="message" name="message" placeholder="Tell us about your business plans..." rows="4"></textarea></div><label style="display:flex;gap:10px;margin:18px 0;font-size:13px;color:#556780"><input required="" style="width:auto" type="checkbox"/> I consent to being contacted regarding this inquiry and understand my information will be used for application follow-up.</label><button class="btn" id="send" type="submit">Submit Franchise Inquiry →</button><p class="small" id="formStatus">Your application will be submitted securely to KKP after the database is configured.</p><div class="success" id="success" role="status"></div></form></div>
 </main><footer>© 2026 KKP Lending Corp. · Application inquiries are subject to review and approval.</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="kkp-config.js"></script>
 <script>
 document.getElementById('inquiry').addEventListener('submit', async function(e){
 e.preventDefault();
-const endpoint=window.KKP_FRANCHISING_FORMSPREE_ENDPOINT || '';
+const config=window.KKP_SUPABASE || {};
 const status=document.getElementById('formStatus');
-if(!/^https:\/\/formspree\.io\/f\/[a-zA-Z0-9]+$/.test(endpoint)){
- status.textContent='Online submission is not connected yet. KKP must configure its application endpoint before applications can be received.';
+if(!config.url || !config.anonKey || config.anonKey.startsWith('PASTE_')){
+ status.textContent='Application submission is not configured yet. Please contact KKP.';
  return;
 }
 const button=document.getElementById('send');button.disabled=true;button.textContent='Submitting...';
 try{
- const response=await fetch(endpoint,{method:'POST',body:new FormData(this),headers:{Accept:'application/json'}});
- if(!response.ok)throw new Error('Submission failed');
+ const form = new FormData(this);
+ const client=window.supabase.createClient(config.url,config.anonKey);
+ const {error}=await client.rpc('submit_franchise_application', {
+  p_applicant_name:String(form.get('name')||'').trim(),
+  p_email:String(form.get('email')||'').trim(),
+  p_phone:String(form.get('phone')||'').trim(),
+  p_preferred_location:String(form.get('location')||'').trim(),
+  p_message:String(form.get('message')||'').trim()
+ });
+ if(error)throw error;
  this.reset();document.getElementById('success').style.display='block';
  document.getElementById('success').textContent='Your application inquiry was submitted successfully.';
  status.textContent='Submission complete.';
