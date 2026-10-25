@@ -21,6 +21,15 @@
   @page{size:A4;margin:14mm}
 }
 
+/* Keep the operating budget heading and tables together on a new PDF page. */
+@media print{
+  #feasibilityPrintReport .operating-budget-page-start{
+    break-before:page!important;
+    page-break-before:always!important;
+    break-after:avoid!important;
+    page-break-after:avoid!important;
+  }
+}
 /* Clean, client-facing feasibility report: on-screen calculator controls never print. */
 #feasibilityPrintReport{display:none}
 @media print{
@@ -185,6 +194,8 @@ function buildFeasibilityReport(){
   section('3. Projected lending and income');stats('#clientResults .client-result');
   section('4. Borrower growth and daily collections');copyTable('#clientOverview .growth-table');
   section('5. Estimated operating budget');
+  // Start section 5 on a fresh printed page, keeping its title with the expense tables.
+  report.lastElementChild.classList.add('operating-budget-page-start');
   const fixed=document.createElement('h3');fixed.textContent='Fixed expenses and utilities';report.appendChild(fixed);copyTable('#expenseDetails .expensesTable');
   const salary=document.createElement('h3');salary.textContent='Salaries and personnel';report.appendChild(salary);copyTable('#expenseDetails .expensesTable:nth-of-type(2)');
   // The second expenses table is a sibling in its own wrapper, not a sibling table.
