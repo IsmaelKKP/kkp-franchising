@@ -89,6 +89,17 @@ header{min-height:96px!important;padding-top:10px!important;padding-bottom:10px!
 .portal-sidebar{top:96px;height:calc(100vh - 96px)}
 @media(max-width:850px){.brand-logo{width:235px!important;height:64px!important}.brand-title b{font-size:17px!important}.brand-area{gap:10px!important}}
 @media(max-width:600px){header{min-height:76px!important;padding:8px 12px!important}.brand-logo{width:165px!important;max-width:43vw!important;height:51px!important}.brand-title{padding-left:10px!important}.brand-title b{font-size:14px!important}.brand-title span{display:none}.portal-sidebar{position:static;height:auto}.portal-shell{min-height:calc(100vh - 76px)}}
+</style><style id="kkp-manager-mabuhay-popup-style">
+#kkpMabuhayOverlay{position:fixed;inset:0;z-index:10000;background:rgba(2,12,30,.88);display:flex;align-items:center;justify-content:center;padding:20px;animation:kkpPopFade .35s ease}
+#kkpMabuhayOverlay.hidden{display:none!important}
+.kkp-mabuhay-card{position:relative;width:min(1100px,96vw);aspect-ratio:1536/1024;border-radius:18px;overflow:hidden;box-shadow:0 0 60px rgba(12,95,198,.45),0 25px 85px rgba(0,0,0,.65);background:#04152c}
+.kkp-mabuhay-card img{display:block;width:100%;height:100%;object-fit:contain}
+.kkp-mabuhay-enter{position:absolute;left:32%;width:36%;top:80.5%;height:10%;border:0;background:transparent;cursor:pointer;border-radius:22px;color:transparent;font-size:1px}
+.kkp-mabuhay-enter:focus-visible{outline:4px solid white;outline-offset:3px}
+.kkp-mabuhay-close{position:absolute;top:3%;right:3%;height:44px;width:44px;border:1px solid #f7d478;background:#071b34cc;color:#ffe28a;border-radius:50%;font-size:28px;line-height:1;cursor:pointer}
+@keyframes kkpPopFade{from{opacity:0}to{opacity:1}}
+@media(max-width:650px){#kkpMabuhayOverlay{padding:8px}.kkp-mabuhay-card{width:100%;border-radius:10px}.kkp-mabuhay-close{height:30px;width:30px;font-size:19px}}
+@media(prefers-reduced-motion:reduce){#kkpMabuhayOverlay{animation:none}}
 </style></head><body>
 <header><div class="brand-area"><img alt="KKP Holdings" class="brand-logo" src="kkp-holdings-logo-clean.png"/><div class="brand-title"><b>Manager Portal</b><span>Track and manage franchise applications</span></div></div><div class="top-actions"><a href="index.html">Homepage</a><span class="notify-wrap hidden" id="notifyWrap"><button aria-expanded="false" aria-label="Application notifications" class="notify-bell" id="notifyBell" type="button"><svg aria-hidden="true" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9 M10 21h4"></path></svg><span class="notify-count hidden" id="notifyCount">0</span></button><div class="notify-panel hidden" id="notifyPanel"><div class="notify-heading"><strong>Notifications</strong><button class="ghost" id="markAllRead" type="button">Mark all read</button></div><div id="notifyList"></div></div></span><button class="ghost hidden" id="logout" type="button">Sign Out</button></div></header><div class="portal-shell"><aside class="portal-sidebar"><nav aria-label="Manager navigation"><button class="nav-link active" data-target="heroPanel" type="button"><span class="nav-ico"><svg aria-hidden="true" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M3 10.5 12 3l9 7.5V21h-6v-7H9v7H3z"></path></svg></span><span>Dashboard</span></button><button class="nav-link" data-target="applicationsPanel" data-open-applications="true" type="button"><span class="nav-ico"><svg aria-hidden="true" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M5 3h11l4 4v14H5z M8 11h9 M8 15h9 M8 19h7"></path></svg></span><span>My Applications</span></button><button class="nav-link" data-target="referralPanel" type="button"><span class="nav-ico"><svg aria-hidden="true" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7 .5l3-3a5 5 0 0 0-7-7l-2 2 M14 11a5 5 0 0 0-7-.5l-3 3a5 5 0 0 0 7 7l2-2"></path></svg></span><span>Referral Link</span></button><button class="nav-link" data-target="" type="button"><span class="nav-ico"><svg aria-hidden="true" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M3 5h18v12H8l-5 4z M7 10h10 M7 14h7"></path></svg></span><span>Send SMS</span></button><button class="nav-link" data-target="changePasswordPanel" type="button"><span class="nav-ico"><svg aria-hidden="true" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M5 11h14v10H5z M8 11V8a4 4 0 0 1 8 0v3 M12 15v2"></path></svg></span><span>Change Password</span></button><button class="nav-link" data-target="supportPanel" type="button"><span class="nav-ico"><svg aria-hidden="true" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20 M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4 M12 17h.01"></path></svg></span><span>Support</span></button></nav><div class="sidebar-foot">KKP Holdings · Manager Workspace</div></aside><main><p aria-live="polite" id="message" role="status">Checking your manager access…</p>
 <section class="hidden" id="dashboard">
@@ -107,6 +118,13 @@ header{min-height:96px!important;padding-top:10px!important;padding-bottom:10px!
 <div class="panel hidden" id="applicationDetails"><div class="detail-top"><h2>Application Details</h2><button class="ghost" id="closeDetails" type="button">Close Details</button></div><p class="small" id="detailReference"></p><div class="detail-grid" id="detailGrid"></div><div class="detail-item"><strong>Questions or Additional Details</strong><div class="detail-message" id="detailMessage"></div></div></div>
 </section></main></div>
 <div aria-live="polite" class="notify-toast hidden" id="notifyToast" role="status"></div>
+<div id="kkpMabuhayOverlay" class="hidden" role="dialog" aria-modal="true" aria-label="Mabuhay! Tara gawa tayo pera! Welcome to your manager dashboard">
+ <div class="kkp-mabuhay-card">
+  <img src="kkp-manager-mabuhay.jpg" alt="Mabuhay! Tara gawa tayo pera! KKP Holdings manager welcome graphic" />
+  <button id="kkpMabuhayClose" class="kkp-mabuhay-close" type="button" aria-label="Close welcome popup">×</button>
+  <button id="kkpMabuhayEnter" class="kkp-mabuhay-enter" type="button" aria-label="Go to my dashboard">Go to my dashboard</button>
+ </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script><script src="kkp-config.js"></script><script>
 'use strict';
 const cfg=window.KKP_SUPABASE||{};
@@ -187,8 +205,23 @@ async function pollNotifications(){
 }
 
 function message(text,ok=false){el('message').textContent=text;el('message').classList.toggle('ok',ok)}
-function hide(){el('dashboard').classList.add('hidden');el('logout').classList.add('hidden');el('applicationDetails').classList.add('hidden');el('notifyWrap').classList.add('hidden');if(notifyTimer){clearInterval(notifyTimer);notifyTimer=null}managerUserId=null;notificationsInitialized=false}
+function hide(){closeMabuhay();el('dashboard').classList.add('hidden');el('logout').classList.add('hidden');el('applicationDetails').classList.add('hidden');el('notifyWrap').classList.add('hidden');if(notifyTimer){clearInterval(notifyTimer);notifyTimer=null}managerUserId=null;notificationsInitialized=false}
 function redirect(){hide();message('Manager sign-in required. Redirecting to login…');location.replace('manager-login.html')}
+
+// Show only after Supabase has confirmed this is an approved manager.
+function maybeShowMabuhay(userId){
+ const key='kkp_mabuhay_seen_'+userId;
+ try{if(sessionStorage.getItem(key)==='1')return;sessionStorage.setItem(key,'1')}catch(_){ }
+ const popup=el('kkpMabuhayOverlay');
+ popup.classList.remove('hidden');
+ el('kkpMabuhayEnter').focus();
+}
+function closeMabuhay(){el('kkpMabuhayOverlay').classList.add('hidden')}
+el('kkpMabuhayClose').addEventListener('click',closeMabuhay);
+el('kkpMabuhayEnter').addEventListener('click',closeMabuhay);
+el('kkpMabuhayOverlay').addEventListener('click',event=>{if(event.target===el('kkpMabuhayOverlay'))closeMabuhay()});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!el('kkpMabuhayOverlay').classList.contains('hidden'))closeMabuhay()});
+
 async function checkAccess(){
  if(!client){message('Supabase configuration missing. Please contact KKP support.');return false}
  const {data:{user},error}=await client.auth.getUser();if(error||!user){redirect();return false}
@@ -201,7 +234,7 @@ async function checkAccess(){
  el('username').textContent='Username: '+(profile.username||'—');
  el('referralLink').value='https://kkpfranchise.com/?ref='+encodeURIComponent(profile.referral_code);
  if(managerUserId!==user.id){managerUserId=user.id;notificationsInitialized=false}
-  el('dashboard').classList.remove('hidden');el('logout').classList.remove('hidden');el('notifyWrap').classList.remove('hidden');message('');
+  el('dashboard').classList.remove('hidden');el('logout').classList.remove('hidden');el('notifyWrap').classList.remove('hidden');message('');maybeShowMabuhay(user.id);
  return true;
 }
 async function load(){
