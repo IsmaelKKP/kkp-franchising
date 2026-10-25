@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#073a7d">
+<title>KKP | Manager Login</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#eff5ff,#f8fbff);color:#143e75;min-height:100vh}header{background:#fff;border-bottom:1px solid #dbe7f6;padding:19px max(20px,calc((100vw - 1050px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px}header strong{font-size:17px}a{color:#0864c8;text-decoration:none}main{max-width:465px;margin:68px auto;padding:0 16px}.panel{background:#fff;border:1px solid #d7e5f6;border-radius:18px;padding:35px;box-shadow:0 16px 44px #173d7512}h1{font-size:29px;margin:0 0 8px}p{color:#577392;line-height:1.6}label{display:block;font-weight:700;margin:18px 0 7px}input{width:100%;padding:13px 14px;border:1px solid #c6d9ef;border-radius:10px;font:inherit;color:#153d74}input:focus{outline:2px solid #7caee8}button{width:100%;border:0;border-radius:10px;padding:14px;background:#0868d6;color:#fff;font:inherit;font-weight:700;cursor:pointer;margin-top:23px}button:disabled{opacity:.6;cursor:wait}.foot{text-align:center;font-size:14px;margin-top:20px}.msg{margin-top:18px;border-radius:9px;padding:12px;background:#fff0f0;color:#a22c2c;display:none}.msg.ok{background:#e8f8ee;color:#18633c}.note{font-size:12px;color:#657e9b;margin-top:16px}@media(max-width:500px){main{margin:28px auto}.panel{padding:23px}header{padding:16px}}
+</style>
+</head>
+<body>
+<header><strong>KKP Lending · Manager Portal</strong><a href="index.html">← Homepage</a></header>
+<main><section class="panel"><h1>Manager Sign In</h1><p>Sign in using the username and password you created during registration.</p>
+<form id="loginForm"><label for="username">Username</label><input id="username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required maxlength="20" placeholder="Enter your username"><label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" required placeholder="Enter your password"><button id="signIn" type="submit">Sign In</button></form>
+<div id="message" class="msg" role="alert" aria-live="polite"></div><p class="note">Only approved managers can access the portal. Forgot your password? Password reset will be added in the next setup phase.</p><div class="foot">New manager? <a href="manager-register.html">Request an account</a></div>
+</section></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="kkp-config.js"></script>
+<script>
+'use strict';
+const config=window.KKP_SUPABASE||{};
+const message=document.getElementById('message');
+const button=document.getElementById('signIn');
+function notify(text,ok=false){message.textContent=text;message.className='msg'+(ok?' ok':'');message.style.display='block'}
+const client=config.url&&config.anonKey&&window.supabase?window.supabase.createClient(config.url,config.anonKey):null;
+document.getElementById('loginForm').addEventListener('submit',async event=>{
+ event.preventDefault();message.style.display='none';
+ if(!client){notify('Login configuration is missing. Contact KKP support.');return}
+ const username=document.getElementById('username').value.trim().toLowerCase();
+ const password=document.getElementById('password').value;
+ if(!/^[a-z][a-z0-9_]{3,19}$/.test(username)||!password){notify('Enter a valid username and password.');return}
+ button.disabled=true;button.textContent='Signing in…';
+ try{
+  const response=await fetch('/api/manager-login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,password})});
+  const result=await response.json();
+  if(!response.ok||!result.access_token||!result.refresh_token){notify('Unable to sign in. Check your credentials or manager approval status.');return}
+  const {error}=await client.auth.setSession({access_token:result.access_token,refresh_token:result.refresh_token});
+  if(error){notify('Could not establish your session. Please try again.');return}
+  const {data:{user}}=await client.auth.getUser();
+  const {data:profile,error:profileError}=await client.from('kkp_manager_profiles').select('role,approval_status').eq('user_id',user?.id||'').maybeSingle();
+  if(profileError||profile?.role!=='manager'||profile?.approval_status!=='approved'){
+   await client.auth.signOut();notify('Your manager account is not approved for access.');return;
+  }
+  document.getElementById('password').value='';
+  notify('Login successful. Your manager dashboard is being prepared.',true);
+  // Redirect will be enabled after the private dashboard is deployed and tested.
+ }catch(error){notify('Login service unavailable. Please try again later.')}finally{button.disabled=false;button.textContent='Sign In'}
+});
+</script>
+</body>
+</html>
